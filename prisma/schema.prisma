@@ -12,3 +12,55 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id       Int    @id @default(autoincrement())
+  correo   String @unique
+  password String
+  fullName String
+  phone    String
+  app      App?
+}
+
+model App {
+  id          Int       @id @default(autoincrement())
+  userId      Int       @unique
+  user        User      @relation(fields: [userId], references: [id])
+  name        String
+  products    Product[]
+  preferences Json
+  Category    Category? @relation("AppCategory", fields: [categoryId], references: [id])
+  categoryId  Int?
+}
+
+model Product {
+  id            Int          @id @default(autoincrement())
+  name          String
+  description   String?
+  price         Float
+  stock         Int
+  recommended   Boolean
+  categoryId    Int
+  category      Category     @relation(fields: [categoryId], references: [id])
+  subcategoryId Int?
+  subcategory   Subcategory? @relation(fields: [subcategoryId], references: [id])
+  App           App?         @relation(fields: [appId], references: [id])
+  appId         Int?
+}
+
+model Category {
+  id            Int           @id @default(autoincrement())
+  name          String
+  image         String?
+  subcategories Subcategory[]
+  products      Product[]
+  apps          App[]         @relation("AppCategory")
+}
+
+model Subcategory {
+  id         Int       @id @default(autoincrement())
+  name       String
+  categoryId Int
+  category   Category  @relation(fields: [categoryId], references: [id])
+  products   Product[]
+}
