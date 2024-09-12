@@ -14,8 +14,8 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  correo   String @unique
+  id       String @id @default(uuid())
+  email    String @unique
   password String
   fullName String
   phone    String
@@ -23,33 +23,33 @@ model User {
 }
 
 model App {
-  id          Int       @id @default(autoincrement())
-  userId      Int       @unique
+  id          String    @id @default(uuid())
+  userId      String    @unique
   user        User      @relation(fields: [userId], references: [id])
   name        String
   products    Product[]
   preferences Json
   Category    Category? @relation("AppCategory", fields: [categoryId], references: [id])
-  categoryId  Int?
+  categoryId  String?
 }
 
 model Product {
-  id            Int          @id @default(autoincrement())
+  id            String       @id @default(uuid())
   name          String
   description   String?
   price         Float
   stock         Int
   recommended   Boolean
-  categoryId    Int
+  categoryId    String
   category      Category     @relation(fields: [categoryId], references: [id])
-  subcategoryId Int?
+  subcategoryId String?
   subcategory   Subcategory? @relation(fields: [subcategoryId], references: [id])
   App           App?         @relation(fields: [appId], references: [id])
-  appId         Int?
+  appId         String?
 }
 
 model Category {
-  id            Int           @id @default(autoincrement())
+  id            String        @id @default(uuid())
   name          String
   image         String?
   subcategories Subcategory[]
@@ -58,9 +58,9 @@ model Category {
 }
 
 model Subcategory {
-  id         Int       @id @default(autoincrement())
+  id         String    @id @default(uuid())
   name       String
-  categoryId Int
+  categoryId String
   category   Category  @relation(fields: [categoryId], references: [id])
   products   Product[]
 }
