@@ -21,7 +21,7 @@ const Input: React.FC<InputProps> = ({
       {...register(name)}
       type={type}
       placeholder={placeholder}
-      className={`${style} text-lg p-2 rounded-lg`}
+      className={`${style} text-lg p-2 rounded-lg placeholder:text-black text-black `}
     />
   );
 };

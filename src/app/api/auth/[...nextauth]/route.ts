@@ -1,15 +1,19 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 import db from "@/libs/prisma";
 import bcrypt from "bcryptjs";
-
 export const authOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: { label: "Email", type: "text", placeholder: "jsmith" },
-        password: { label: "Password", type: "password", placeholder: "*****" },
+        email: { label: "Email", type: "text", placeholder: "Email" },
+        password: {
+          label: "Password",
+          type: "password",
+          placeholder: "Password",
+        },
       },
       async authorize(credentials, req) {
         const userFound = await db.user.findUnique({
@@ -17,11 +21,11 @@ export const authOptions = {
             email: credentials?.email,
           },
         });
-        if (!userFound) throw new Error("No user found");
+        if (!userFound) throw new Error("Usuario no encontrado");
         const matchPassword = credentials?.password
           ? await bcrypt.compare(credentials.password, userFound.password)
           : false;
-        if (!matchPassword) throw new Error("Wrong password");
+        if (!matchPassword) throw new Error("Datos incorrectos");
         return {
           id: userFound.id,
           name: userFound.fullName,
@@ -30,10 +34,15 @@ export const authOptions = {
         };
       },
     }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID || "",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+    }),
   ],
   pages: {
     signIn: "/auth/login",
   },
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
 const handler = NextAuth(authOptions);
