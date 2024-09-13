@@ -25,7 +25,7 @@ export const authOptions = {
         const matchPassword = credentials?.password
           ? await bcrypt.compare(credentials.password, userFound.password)
           : false;
-        if (!matchPassword) throw new Error("Datos incorrectos");
+        if (!matchPassword) throw new Error("Contraseña incorrecta");
         return {
           id: userFound.id,
           name: userFound.fullName,
@@ -43,6 +43,30 @@ export const authOptions = {
     signIn: "/auth/login",
   },
   secret: process.env.NEXTAUTH_SECRET,
+  callbacks: {
+    jwt({ token, user }) {
+      if (user) {
+        token.role = user.role;
+      }
+      return token;
+    },
+    session({ session, token }) {
+      if (session.user) {
+        session.user.role = token.role;
+      }
+      return session;
+    },
+  },
+  // events: {
+  //   async linkAccount({ user }) {
+  //     await db.user.update({
+  //       where: { id: user.id },
+  //       data: {
+  //         emailVerified: new Date(),
+  //       },
+  //     });
+  //   },
+  // },
 };
 
 const handler = NextAuth(authOptions);
