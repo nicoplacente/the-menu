@@ -2,6 +2,7 @@ import SectionContainer from "@/components/section-container";
 import PricingCard from "@/components/pricing-card";
 
 interface PricingTypes {
+  id: string;
   price: string;
   isMoreSale: boolean;
   title: string;
@@ -11,6 +12,7 @@ interface PricingTypes {
 
 const pricing = [
   {
+    id: "dyuhduawhdwau",
     price: "$500.000",
     isMoreSale: false,
     title: "Plan Básico",
@@ -31,6 +33,7 @@ const pricing = [
     ],
   },
   {
+    id: "udwahudaudauu",
     price: "$40.000/mes",
     isMoreSale: true,
     title: "Plan Pro",
@@ -60,7 +63,7 @@ export default function Home() {
       >
         <div className="flex flex-col md:flex-row items-center justify-center gap-12">
           {pricing.map((card: PricingTypes) => {
-            return <PricingCard card={card} />;
+            return <PricingCard key={card.id} card={card} />;
           })}
         </div>
       </SectionContainer>

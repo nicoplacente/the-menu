@@ -2,6 +2,7 @@ import { IconCircleDashedCheck } from "@tabler/icons-react";
 import Parrafos from "./ui/parrafos";
 
 interface PricingTypes {
+  id: string;
   price: string;
   title: string;
   isMoreSale: boolean;
@@ -27,16 +28,16 @@ export default function PricingCard({ card }: { card: PricingTypes }) {
           <Parrafos>{card.description}</Parrafos>
         </div>
         <ul>
-          {card.features.map((feature: string) => (
-            <li className="flex items-center gap-2 p-2 text-sm">
+          {card.features.map((feature: string, index) => (
+            <li key={index} className="flex items-center gap-2 p-2 text-sm">
               <IconCircleDashedCheck className="text-green-400 w-6" />
               <span className="w-full">{feature}</span>
             </li>
           ))}
           {card.notFeatures &&
-            card.notFeatures.map((feature: string) => (
+            card.notFeatures.map((feature: string, index) => (
               <li
-                key={feature}
+                key={index}
                 className="flex items-center gap-2 p-2 text-gray-700 text-sm line-through"
               >
                 <IconCircleDashedCheck className="text-gray-700 w-6" />
