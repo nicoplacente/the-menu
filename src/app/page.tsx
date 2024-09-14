@@ -1,101 +1,91 @@
-import Image from "next/image";
+import SectionContainer from "@/components/section-container";
+import PricingCard from "@/components/pricing-card";
+
+interface PricingTypes {
+  price: string;
+  isMoreSale: boolean;
+  title: string;
+  description: string;
+  features: string[];
+}
+
+const pricing = [
+  {
+    price: "$500.000",
+    isMoreSale: false,
+    title: "Plan Básico",
+    description: "Pago Único",
+    features: [
+      "Mejora tu restaurante",
+      "Crea tu carta digital única",
+      "Gestiona precios y el stock",
+      "Facil de usar y personalizar",
+      "Genera una buena impresion",
+      "Obtendrás un código QR con acceso directo a la carta",
+    ],
+    notFeatures: [
+      "Destaca el plato del día",
+      "Gestión de reservas",
+      "Gestión de delivery",
+      "Acceso al soporte para modificaciónes únicas y personalizadas",
+    ],
+  },
+  {
+    price: "$40.000/mes",
+    isMoreSale: true,
+    title: "Plan Pro",
+    description: "Todo en una sola app",
+    features: [
+      "Mejora tu restaurante",
+      "Crea tu carta digital única",
+      "Gestiona precios y el stock",
+      "Facil de usar y personalizar",
+      "Genera una buena impresion",
+      "Obtendrás un código QR con acceso directo a la carta",
+      "Destaca el plato del día",
+      "Gestión de reservas",
+      "Gestión de delivery",
+      "Acceso al soporte para modificaciónes únicas y personalizadas",
+    ],
+  },
+];
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <main>
+      <SectionContainer
+        id="planes"
+        title="Elegí el plan ideal para vos"
+        description="me gusta la mama de tiago y le reviento el culo a la re gorda puta esa"
+      >
+        <div className="flex flex-col md:flex-row items-center justify-center gap-12">
+          {pricing.map((card: PricingTypes) => {
+            return <PricingCard card={card} />;
+          })}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </SectionContainer>
+
+      <SectionContainer
+        id="info"
+        title="¿Qué es YourCard?"
+        description="📱 YourCard es la solución definitiva para llevar tu restaurante al
+          siguiente nivel. Crea una carta digital única, fácil de usar y
+          totalmente personalizable para que refleje la esencia de tu marca. ✨
+          Destaca con lo mejor: Resalta el plato del día, ajusta precios y
+          controla el stock en tiempo real. ¡Todo a tu alcance! 🚀 Gestión
+          total: Maneja las reservas y el servicio de delivery desde una sola
+          plataforma, optimizando el tiempo y brindando una experiencia superior
+          a tus clientes. 🔗 Códigos QR: Ofrece a tus comensales acceso rápido a
+          tu carta digital con un simple escaneo. Sorpréndelos con una
+          presentación moderna y profesional. 🔧 Soporte personalizado:
+          ¿Necesitas cambios únicos? ¡No hay problema! Nuestro equipo está
+          disponible para modificar tu carta según tus necesidades. Haz que tu
+          restaurante se destaque con YourCard. ¡Empieza hoy mismo y genera una
+          impresión inolvidable! 👉 YourCard: La carta que transforma tu
+          negocio."
+      >
+        <></>
+      </SectionContainer>
+    </main>
   );
 }
