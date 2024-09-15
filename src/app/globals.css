@@ -45,3 +45,13 @@
   stroke-dasharray: 20 300;
   stroke-dashoffset: -32.42;
 }
+
+/* Info Section Styles */
+
+.info-li {
+  @apply text-pretty;
+}
+
+.info-span {
+  @apply font-bold;
+}

@@ -1,5 +1,6 @@
 import SectionContainer from "@/components/section-container";
 import PricingCard from "@/components/pricing-card";
+import YourcardInfo from "@/components/yourcard-info";
 
 interface PricingTypes {
   id: string;
@@ -71,23 +72,10 @@ export default function Home() {
       <SectionContainer
         id="info"
         title="¿Qué es YourCard?"
-        description="📱 YourCard es la solución definitiva para llevar tu restaurante al
-          siguiente nivel. Crea una carta digital única, fácil de usar y
-          totalmente personalizable para que refleje la esencia de tu marca. ✨
-          Destaca con lo mejor: Resalta el plato del día, ajusta precios y
-          controla el stock en tiempo real. ¡Todo a tu alcance! 🚀 Gestión
-          total: Maneja las reservas y el servicio de delivery desde una sola
-          plataforma, optimizando el tiempo y brindando una experiencia superior
-          a tus clientes. 🔗 Códigos QR: Ofrece a tus comensales acceso rápido a
-          tu carta digital con un simple escaneo. Sorpréndelos con una
-          presentación moderna y profesional. 🔧 Soporte personalizado:
-          ¿Necesitas cambios únicos? ¡No hay problema! Nuestro equipo está
-          disponible para modificar tu carta según tus necesidades. Haz que tu
-          restaurante se destaque con YourCard. ¡Empieza hoy mismo y genera una
-          impresión inolvidable! 👉 YourCard: La carta que transforma tu
-          negocio."
+        description="La solución definitiva para llevar tu restaurante al
+          siguiente nivel. "
       >
-        <></>
+        <YourcardInfo />
       </SectionContainer>
     </main>
   );

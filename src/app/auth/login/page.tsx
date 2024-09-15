@@ -1,6 +1,6 @@
 "use client";
 import { LoginAction, LoginGoogleAction } from "@/actions/auth/auth-actions";
-import Input from "@/components/input/inputLogin";
+import Input from "@/components/ui/inputLogin";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
