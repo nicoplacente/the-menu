@@ -1,10 +1,14 @@
+"use client";
 import Link from "next/link";
 import { IconLogin2 } from "@tabler/icons-react";
 import { HeaderButton, HeaderButtonNotHover } from "./ui/header-button";
 import Image from "next/image";
 import MobileHeaderButton from "./ui/mobile-header-button";
+import { signOut, useSession } from "next-auth/react";
+import { Button } from "./ui/button";
 
 export default function Header() {
+  const { data: session } = useSession();
   return (
     <header className="flex sticky top-0 z-50 items-center justify-between py-4 px-6 bg-black/20 backdrop-blur">
       <span className="absolute w-full h-1 left-0 bottom-0 bg-[linear-gradient(90deg,transparent,#ec489999,#fb923c99,transparent)]"></span>
@@ -28,12 +32,54 @@ export default function Header() {
           <HeaderButton href="#planes">Plan de Pago</HeaderButton>
           <HeaderButton href="#info">¿Qué es YourCard?</HeaderButton>
         </ul>
-        <HeaderButtonNotHover href="/login">
-          Iniciar Sesión
-          <span className="hidden sm:block">
-            <IconLogin2 />
-          </span>
-        </HeaderButtonNotHover>
+
+        {/* {session?.user ? (
+          <Link href="/dashboard" className="-mt-2">
+            <img
+              src={session?.user?.image ?? "/default-avatar.png"}
+              alt="Avatar"
+              className="size-16 rounded-full object-cover cursor-pointer"
+            />
+          </Link>
+        ) : (
+          <HeaderButtonNotHover href="/auth/login">
+            Iniciar Sesión
+            <span className="hidden sm:block">
+              <IconLogin2 />
+            </span>
+          </HeaderButtonNotHover>
+        )} */}
+
+        {session?.user ? (
+          <div className="flex items-center m-2 gap-4 p-2 ">
+            <div>
+              <Link href="/dashboard">
+                <img
+                  src={session?.user?.image ?? "/default-avatar.png"}
+                  alt="Avatar"
+                  className="size-14 rounded-full object-cover cursor-pointer"
+                />
+              </Link>
+            </div>
+            <div>
+              <Button
+                txt="Logout"
+                onclick={async () => {
+                  await signOut({
+                    callbackUrl: "/",
+                  });
+                }}
+              />
+            </div>
+          </div>
+        ) : (
+          <HeaderButtonNotHover href="/auth/login">
+            Iniciar Sesión
+            <span className="hidden sm:block">
+              <IconLogin2 />
+            </span>
+          </HeaderButtonNotHover>
+        )}
       </nav>
     </header>
   );
