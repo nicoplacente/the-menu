@@ -7,6 +7,9 @@ import { useRouter } from "next/navigation";
 import { alerts } from "@/utils/alerts";
 import { Button } from "@/components/ui/button";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
+import Link from "next/link";
+
 const Login = () => {
   const { register, handleSubmit } = useForm();
   const router = useRouter();
@@ -38,50 +41,58 @@ const Login = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-4 p-8 border border-white justify-center align-middle"
-    >
-      <button
-        type="button"
-        onClick={SubmitGoogle}
-        className="flex justify-center w-full items-center gap-2 bg-white p-3 rounded-lg"
-        aria-label="Iniciar sesión con Google"
-      >
-        <img
-          src="/Google_G_logo.svg.webp"
-          alt="google-icon"
-          className="size-8"
-        />
-        Iniciar con Google
-      </button>
-      <div className="flex items-center gap-4">
-        <hr className="flex-grow border-gray-400" />
-        <p className="text-white">O</p>
-        <hr className="flex-grow border-gray-400" />
-      </div>
-      <Input type="text" placeholder="Email" name="email" register={register} />
-      <Input
-        type="password"
-        placeholder="Contraseña"
-        name="password"
-        register={register}
+    <section className="flex w-full h-screen items-center p-4 md:p-0">
+      <img
+        src="https://imgs.search.brave.com/OXOxyx32R_ZaOGTmDNEpOmSxoF2swtf2Soy3q8fErAk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG5z/cGVjc2V1LmJpemF5/LmNvbS8yNC8xNC9l/bWVudGEtQTQucG5n/P3ZlcnNpb249M2E1/NDdjNDhlNmQ3Y2E2/ZWE2NWJjNWU1MGQ3/M2IzNzM"
+        alt="YourCard"
+        className="w-1/2 h-full object-cover hidden md:block"
       />
-      <div className="flex justify-center items-center text-white gap-2 ">
-        <input type="checkbox" className="cursor-pointer size-4" />
-        <p>Acepto los terminos y politicas de la poronga esta</p>
-      </div>
-      <Button txt="Iniciar Sesión" />
-      <div className="flex flex-col justify-center items-center gap-4 text-white">
-        <a>¿Has olvidado tu contraseña?</a>
-        <p>
-          Todavia no tienes una cuenta?{" "}
-          <a href="/auth/register" className="underline">
-            Registrate
-          </a>
-        </p>
-      </div>
-    </form>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col gap-4 mx-auto justify-center lg:w-1/4"
+      >
+        <button
+          type="button"
+          onClick={SubmitGoogle}
+          className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white text-white focus:ring-4 focus:outline-none focus:ring-pink-800"
+          aria-label="Iniciar sesión con Google"
+        >
+          {" "}
+          <span className="flex items-center justify-center gap-2 px-5 py-2.5 transition-all ease-in duration-75 bg-gray-900 w-full rounded-md group-hover:bg-opacity-0">
+            <img src="/google.webp" alt="Google Logo" className="size-4" />
+            Iniciar con Google
+          </span>
+        </button>
+        <div className="flex items-center gap-4">
+          <hr className="flex-grow border-gray-400" />
+          <p className="text-white">O</p>
+          <hr className="flex-grow border-gray-400" />
+        </div>
+        <Input
+          type="text"
+          placeholder="Email"
+          name="email"
+          register={register}
+        />
+        <Input
+          type="password"
+          placeholder="Contraseña"
+          name="password"
+          register={register}
+        />
+
+        <Button txt="Iniciar Sesión" />
+        <div className="flex flex-col justify-center items-center gap-4 text-white">
+          <Link href="/reset-password">¿Has olvidado tu contraseña?</Link>
+          <p>
+            Todavia no tienes una cuenta?{" "}
+            <a href="/auth/register" className="underline">
+              Registrate
+            </a>
+          </p>
+        </div>
+      </form>
+    </section>
   );
 };
 
