@@ -20,8 +20,12 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "YourCard",
   description:
-    "📱 YourCard es la solución definitiva para llevar tu restaurante al siguiente nivel. Crea una carta digital única, fácil de usar y totalmente personalizable para que refleje la esencia de tu marca.✨ Destaca con lo mejor: Resalta el plato del día, ajusta precios y controla el stock en tiempo real. ¡Todo a tu alcance!🚀 Gestión total: Maneja las reservas y el servicio de delivery desde una sola plataforma, optimizando el tiempo y brindando una experiencia superior a tus clientes.🔗 Códigos QR: Ofrece a tus comensales acceso rápido a tu carta digital con un simple escaneo. Sorpréndelos con una presentación moderna y profesional.🔧 Soporte personalizado: ¿Necesitas cambios únicos? ¡No hay problema! Nuestro equipo está disponible para modificar tu carta según tus necesidades.Haz que tu restaurante se destaque con YourCard. ¡Empieza hoy mismo y genera una impresión inolvidable!👉 YourCard: La carta que transforma tu negocio.",
+    "📱 YourCard es la solución definitiva para llevar tu restaurante al siguiente nivel. Crea una carta digital única, fácil de usar y totalmente personalizable para que refleje la esencia de tu marca.✨ Destaca con lo mejor: Resalta el plato del día, ajusta precios y controla el stock en tiempo real. ¡Todo a tu alcance!🚀 Gestión total: Maneja las reservas desde una sola plataforma, optimizando el tiempo y brindando una experiencia superior a tus clientes.🔗 Códigos QR: Ofrece a tus comensales acceso rápido a tu carta digital con un simple escaneo. Sorpréndelos con una presentación moderna y profesional.🔧 Soporte personalizado: ¿Necesitas cambios únicos? ¡No hay problema! Nuestro equipo está disponible para modificar tu carta según tus necesidades.Haz que tu restaurante se destaque con YourCard. ¡Empieza hoy mismo y genera una impresión inolvidable!👉 YourCard: La carta que transforma tu negocio.",
   icons: { icon: "/yourcard.webp" },
+};
+
+export const viewport = {
+  themeColor: "#020617",
 };
 
 export default function RootLayout({
@@ -30,7 +34,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

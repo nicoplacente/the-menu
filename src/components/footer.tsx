@@ -33,7 +33,7 @@ export default function Footer() {
                 height={422}
                 priority
               />
-              <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
+              <span className="self-center text-xl font-semibold whitespace-nowrap text-white">
                 YourCard
               </span>
             </span>
@@ -50,7 +50,7 @@ export default function Footer() {
                     target="_blank"
                     rel="nofollow noopener noreferrer"
                     href="mailto:codeluxetech@gmail.com"
-                    className="hover:underline"
+                    className="hover:underline text-sm"
                   >
                     Email
                   </a>
@@ -61,7 +61,7 @@ export default function Footer() {
                     target="_blank"
                     rel="nofollow noopener noreferrer"
                     href="https://wa.me/2926402409"
-                    className="hover:underline"
+                    className="hover:underline text-sm"
                   >
                     WhatsApp
                   </a>
@@ -81,7 +81,7 @@ export default function Footer() {
                         target="_blank"
                         rel="nofollow noopener noreferrer"
                         href={red.link}
-                        className="hover:underline "
+                        className="hover:underline text-sm"
                       >
                         {red.name}
                       </a>
@@ -98,7 +98,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href="/terminos-y-condiciones"
-                    className="hover:underline"
+                    className="hover:underline text-sm"
                   >
                     Terms &amp; Conditions
                   </Link>

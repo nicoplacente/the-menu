@@ -17,7 +17,7 @@ export const LoginAction = async (data: LoginData) => {
     });
     return result;
   } catch (error) {
-    console.log("Error en la autenticación:", error);
+    alerts("error", "Error en la autenticación");
   }
 };
 
@@ -28,6 +28,6 @@ export const LoginGoogleAction = async () => {
       redirect: false,
     });
   } catch (error) {
-    console.log("Error en la autenticación:", error);
+    alerts("error", "Error en la autenticación");
   }
 };

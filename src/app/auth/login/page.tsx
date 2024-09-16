@@ -74,12 +74,14 @@ const Login = () => {
 
         <Button txt="Iniciar Sesión" />
         <div className="flex flex-col justify-center items-center gap-4 text-white">
-          <Link href="/reset-password">¿Has olvidado tu contraseña?</Link>
+          <Link className="hover:underline" href="/reset-password">
+            ¿Has olvidado tu contraseña?
+          </Link>
           <p>
-            Todavia no tienes una cuenta?{" "}
-            <a href="/auth/register" className="underline">
+            ¿Todavia no tienes una cuenta?{" "}
+            <Link href="/auth/register" className="hover:underline">
               Registrate
-            </a>
+            </Link>
           </p>
         </div>
       </form>

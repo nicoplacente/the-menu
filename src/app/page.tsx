@@ -57,7 +57,11 @@ const pricing = [
 export default function Home() {
   return (
     <main>
-      <SectionContainer id="planes" title="Elegí el plan ideal para vos">
+      <SectionContainer
+        id="planes"
+        title="YourCard"
+        description="Elegí el plan ideal para vos"
+      >
         <div className="flex flex-col-reverse md:flex-row items-center justify-center gap-12">
           {pricing.map((card: PricingTypes) => {
             return <PricingCard key={card.id} card={card} />;
