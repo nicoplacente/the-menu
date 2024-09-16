@@ -6,6 +6,8 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { alerts } from "@/utils/alerts";
 import { Button } from "@/components/ui/button";
+import CheckBoxButton from "@/components/ui/checkbox-button";
+import Link from "next/link";
 const Register = () => {
   const { register, handleSubmit } = useForm();
   const router = useRouter();
@@ -35,46 +37,58 @@ const Register = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-4 p-8 border border-white justify-center align-middle"
-    >
-      <button
-        type="button"
-        onClick={SubmitGoogle}
-        className="flex justify-center w-full items-center gap-2 bg-white p-3 rounded-lg"
-        aria-label="Iniciar sesión con Google"
-      >
-        <img
-          src="/Google__G__logo.svg.webp"
-          alt="google-icon"
-          className="size-8"
-        />
-        Iniciar con Google
-      </button>
-      <div className="flex items-center gap-4">
-        <hr className="flex-grow border-gray-400" />
-        <p className="text-white">O</p>
-        <hr className="flex-grow border-gray-400" />
-      </div>
-      <Input type="text" placeholder="Email" name="email" register={register} />
-      <Input
-        type="password"
-        placeholder="Contraseña"
-        name="password"
-        register={register}
+    <section className="flex w-full h-screen items-center p-4 md:p-0">
+      <img
+        src="/yourcard.webp"
+        alt="YourCard"
+        className="w-1/2 h-full object-cover hidden md:block"
       />
-      <Button txt="Registrarte" />
-      <div className="flex flex-col justify-center items-center gap-4 text-white">
-        <a>¿Has olvidado tu contraseña?</a>
-        <p>
-          Todavia no tienes una cuenta?{" "}
-          <a href="/auth/register" className="underline">
-            Registrate
-          </a>
-        </p>
-      </div>
-    </form>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col gap-4 mx-auto justify-center lg:w-1/4"
+      >
+        <button
+          type="button"
+          onClick={SubmitGoogle}
+          className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white text-white focus:ring-4 focus:outline-none focus:ring-pink-800"
+          aria-label="Iniciar sesión con Google"
+        >
+          {" "}
+          <span className="flex items-center justify-center gap-2 px-5 py-2.5 transition-all ease-in duration-75 bg-gray-900 w-full rounded-md group-hover:bg-opacity-0">
+            <img src="/google.webp" alt="Google Logo" className="size-4" />
+            Iniciar con Google
+          </span>
+        </button>
+        <div className="flex items-center gap-4">
+          <hr className="flex-grow border-gray-400" />
+          <p className="text-white">O</p>
+          <hr className="flex-grow border-gray-400" />
+        </div>
+        <Input
+          type="text"
+          placeholder="Email"
+          name="email"
+          register={register}
+        />
+        <Input
+          type="password"
+          placeholder="Contraseña"
+          name="password"
+          register={register}
+        />
+        <CheckBoxButton />
+        <Button txt="Registrarse" />
+        <div className="flex flex-col justify-center items-center gap-4 text-white">
+          <Link href="/reset-password">¿Has olvidado tu contraseña?</Link>
+          <p>
+            Ya tienes una cuenta?{" "}
+            <a href="/auth/login" className="underline">
+              Inicia Sesión
+            </a>
+          </p>
+        </div>
+      </form>
+    </section>
   );
 };
 
