@@ -30,7 +30,6 @@ const Register = () => {
 
   const SubmitGoogle = async () => {
     const result = await LoginGoogleAction();
-    console.log(result);
     if (result) {
       router.push("/");
     }

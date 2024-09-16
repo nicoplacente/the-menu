@@ -17,7 +17,7 @@ export const LoginAction = async (data: LoginData) => {
     });
     return result;
   } catch (error) {
-    console.log("Error en la autenticación:", error);
+    alerts("error", "Error en la autenticación");
   }
 };
 
@@ -26,6 +26,6 @@ export const LoginGoogleAction = async () => {
     const result = await signIn("google", { redirect: false });
     return result;
   } catch (error) {
-    console.log("Error en la autenticación:", error);
+    alerts("error", "Error en la autenticación");
   }
 };
