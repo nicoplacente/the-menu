@@ -23,8 +23,7 @@ export const LoginAction = async (data: LoginData) => {
 
 export const LoginGoogleAction = async () => {
   try {
-    const result = await signIn("google", { redirect: false });
-    return result;
+    await signIn("google", { redirect: false });
   } catch (error) {
     console.log("Error en la autenticación:", error);
   }

@@ -1,14 +1,21 @@
 "use client";
 import { LoginAction, LoginGoogleAction } from "@/actions/auth/auth-actions";
 import Input from "@/components/ui/inputLogin";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { alerts } from "@/utils/alerts";
 import { Button } from "@/components/ui/button";
+import { useSession } from "next-auth/react";
 const Login = () => {
   const { register, handleSubmit } = useForm();
   const router = useRouter();
+  const { data: session } = useSession();
+  useEffect(() => {
+    if (session?.user) {
+      router.push("/");
+    }
+  }, [session]);
 
   const onSubmit = async (data: any) => {
     const result = await LoginAction(data);
@@ -27,11 +34,7 @@ const Login = () => {
   };
 
   const SubmitGoogle = async () => {
-    const result = await LoginGoogleAction();
-    console.log(result);
-    if (result) {
-      router.push("/");
-    }
+    await LoginGoogleAction();
   };
 
   return (
