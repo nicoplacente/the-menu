@@ -79,12 +79,14 @@ const Register = () => {
         <CheckBoxButton />
         <Button txt="Registrarse" />
         <div className="flex flex-col justify-center items-center gap-4 text-white">
-          <Link href="/reset-password">¿Has olvidado tu contraseña?</Link>
+          <Link className="hover:underline" href="/reset-password">
+            ¿Has olvidado tu contraseña?
+          </Link>
           <p>
-            Ya tienes una cuenta?{" "}
-            <a href="/auth/login" className="underline">
+            ¿Ya tienes una cuenta?{" "}
+            <Link href="/auth/login" className="hover:underline">
               Inicia Sesión
-            </a>
+            </Link>
           </p>
         </div>
       </form>
