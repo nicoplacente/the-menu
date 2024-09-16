@@ -58,8 +58,6 @@
 
 /* Button Checkbox Styles */
 
-/* From Uiverse.io by bociKond */
-/* Hide the default checkbox */
 .container input {
   position: absolute;
   opacity: 0;
@@ -75,7 +73,6 @@
   user-select: none;
 }
 
-/* Create a custom checkbox */
 .checkmark {
   --clr: #0b6e4f;
   position: relative;
@@ -88,26 +85,22 @@
   transition: 300ms;
 }
 
-/* When the checkbox is checked, add a blue background */
 .container input:checked ~ .checkmark {
   background-color: var(--clr);
   border-radius: 0.5rem;
-  animation: pulse 500ms ease-in-out;
+  animation: checkbox-animation 500ms ease-in-out;
 }
 
-/* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
   content: "";
   position: absolute;
   display: none;
 }
 
-/* Show the checkmark when checked */
 .container input:checked ~ .checkmark:after {
   display: block;
 }
 
-/* Style the checkmark/indicator */
 .container .checkmark:after {
   left: 0.45em;
   top: 0.25em;
@@ -118,7 +111,7 @@
   transform: rotate(45deg);
 }
 
-@keyframes pulse {
+@keyframes checkbox-animation {
   0% {
     box-shadow: 0 0 0 #0b6e4f90;
     rotate: 20deg;
