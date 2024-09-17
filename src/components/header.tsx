@@ -28,22 +28,6 @@ export default function Header() {
           <HeaderButton href="#planes">Plan de Pago</HeaderButton>
           <HeaderButton href="#info">¿Qué es YourCard?</HeaderButton>
         </ul>
-        {/* {session?.user ? (
-          <Link href="/dashboard" className="-mt-2">
-            <img
-              src={session?.user?.image ?? "/default-avatar.png"}
-              alt="Avatar"
-              className="size-16 rounded-full object-cover cursor-pointer"
-            />
-          </Link>
-        ) : (
-          <HeaderButtonNotHover href="/auth/login">
-            Iniciar Sesión
-            <span className="hidden sm:block">
-              <IconLogin2 />
-            </span>
-          </HeaderButtonNotHover>
-        )} */}
         <ClientSessionheader />
       </nav>
     </header>
