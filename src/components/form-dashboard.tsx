@@ -10,7 +10,10 @@ export default function FormDashboard() {
   const { register, handleSubmit } = useForm();
   const onSubmit = () => {};
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex gap-3">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex w-9/12 justify-between mx-auto"
+    >
       <span className="flex flex-col gap-3">
         <Input
           type="text"

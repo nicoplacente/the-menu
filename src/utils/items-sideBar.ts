@@ -1,32 +1,23 @@
-import { signOut } from "next-auth/react";
 interface Item {
   txt: string;
-  funcion?: () => Promise<void>;
+  icono: string;
 }
 
 export const ItemsSideBar: Item[] = [
   {
     txt: "Perfil",
-    funcion: undefined,
+    icono: "",
   },
   {
     txt: "Administrar Carta",
-    funcion: undefined,
+    icono: "",
   },
   {
     txt: "Administrar Metodos de pago",
-    funcion: undefined,
+    icono: "",
   },
   {
     txt: "Cancelar Subscripcion",
-    funcion: undefined,
-  },
-  {
-    txt: "Cerrar Sesion",
-    funcion: async () => {
-      await signOut({
-        callbackUrl: "/",
-      });
-    },
+    icono: "",
   },
 ];
