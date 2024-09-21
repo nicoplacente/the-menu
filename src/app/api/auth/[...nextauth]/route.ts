@@ -44,13 +44,13 @@ export const authOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    jwt({ token, user }) {
+    jwt({ token, user }: any) {
       if (user) {
         token.role = user.role;
       }
       return token;
     },
-    session({ session, token }) {
+    session({ session, token }: any) {
       if (session.user) {
         session.user.role = token.role;
       }

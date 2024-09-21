@@ -24,14 +24,9 @@ const Login = () => {
     const result = await LoginAction(data);
 
     if (result?.error || !result || result.status === 401) {
-      alerts(
-        "error",
-        typeof result?.error === "string"
-          ? result?.error
-          : JSON.stringify(result?.error)
-      );
+      alerts("error", "Ha ocurrido un error al iniciar sesión");
     } else if (result.status === 200) {
-      alerts("success", "Inicio de Sesion correcto");
+      alerts("success", "Inicio de sesión correcto");
       router.push("/");
     }
   };

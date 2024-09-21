@@ -1,20 +1,22 @@
-import Parrafos from "./ui/parrafos";
+import Parrafos from "../ui/parrafos";
 
 export default function SectionContainer({
   children,
   title,
   description,
   id,
+  className,
 }: {
   children: React.ReactNode;
   title?: string;
   description?: string;
   id?: string;
+  className?: string;
 }) {
   return (
     <section
       id={id}
-      className="p-4 my-12 flex flex-col max-w-7xl mx-auto text-white"
+      className={`p-4 my-12 flex flex-col max-w-7xl mx-auto ${className}`}
     >
       {title && (
         <div className="mt-20 mb-32 flex flex-col gap-4 items-center">

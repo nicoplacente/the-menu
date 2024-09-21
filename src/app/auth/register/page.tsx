@@ -16,14 +16,9 @@ const Register = () => {
     const result = await LoginAction(data);
 
     if (result?.error || !result || result.status === 401) {
-      alerts(
-        "error",
-        typeof result?.error === "string"
-          ? result?.error
-          : JSON.stringify(result?.error)
-      );
+      alerts("error", "Ha ocurrido un error al registrarse");
     } else if (result.status === 200) {
-      alerts("success", "Inicio de Sesion correcto");
+      alerts("success", "Usuario registrado correctamente");
       router.push("/");
     }
   };

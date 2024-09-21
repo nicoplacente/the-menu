@@ -1,5 +1,5 @@
 import { IconCircleDashedCheck } from "@tabler/icons-react";
-import Parrafos from "./ui/parrafos";
+import Parrafos from "../ui/parrafos";
 
 interface PricingTypes {
   id: string;
