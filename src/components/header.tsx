@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { HeaderButton, HeaderButtonNotHover } from "./ui/header-button";
+import { HeaderButton } from "./ui/header-button";
 import Image from "next/image";
 import MobileHeaderButton from "./ui/mobile-header-button";
 import ClientSessionheader from "./client-session-header";

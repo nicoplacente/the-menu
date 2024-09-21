@@ -1,22 +1,27 @@
 "use client";
 
-import { IconLogin2, IconUserCircle } from "@tabler/icons-react";
-import { signOut, useSession } from "next-auth/react";
+import { IconLogin2, IconUser } from "@tabler/icons-react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { HeaderButtonNotHover } from "./ui/header-button";
 
 export default function ClientSessionheader() {
   const { data: session } = useSession();
+
   return (
     <>
       {" "}
       {session?.user ? (
         <Link href="/dashboard" className="-mt-2">
-          <img
-            src={session?.user?.image ?? "/default-avatar.png"}
-            alt="Avatar"
-            className="size-16 rounded-full object-cover cursor-pointer"
-          />
+          {session?.user?.image ? (
+            <img
+              src={session?.user?.image}
+              alt="Avatar"
+              className="size-16 rounded-full object-cover cursor-pointer"
+            />
+          ) : (
+            <IconUser className="size-16 text-white border-2 rounded-full p-4" />
+          )}
         </Link>
       ) : (
         <HeaderButtonNotHover href="/auth/login">

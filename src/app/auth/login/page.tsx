@@ -1,5 +1,4 @@
 "use client";
-import { LoginAction, LoginGoogleAction } from "@/actions/auth/auth-actions";
 import Input from "@/components/ui/inputLogin";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -8,6 +7,8 @@ import { alerts } from "@/utils/alerts";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { validateLogin } from "@/utils/validators/login-validations";
+import { LoginAction } from "@/actions/auth/auth-actions";
+import { LoginGoogleAction } from "@/actions/auth/login-google";
 
 const Login = () => {
   const {
@@ -28,13 +29,11 @@ const Login = () => {
       return;
     }
 
-    const result = await LoginAction(data);
-
-    if (result?.error || !result || result.status === 401) {
-      alerts("error", result?.error);
-    } else if (result.status === 200) {
-      alerts("success", "Inicio de Sesion correcto");
-      router.push("/");
+    const response = await LoginAction(data);
+    if (response.error) {
+      alerts("error", response?.error);
+    } else {
+      router.push("/dashboard");
     }
   };
 

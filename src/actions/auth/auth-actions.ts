@@ -1,7 +1,12 @@
-"use client";
+"use server";
 
-import { alerts } from "@/utils/alerts";
-import { signIn } from "next-auth/react";
+import { signIn } from "@/auth";
+import bcrypt from "bcryptjs";
+import db from "@/libs/prisma";
+import { validate } from "class-validator";
+import { plainToInstance } from "class-transformer";
+import { RegisterDto } from "@/utils/validators/register-validations";
+
 interface LoginData {
   email: string;
   password: string;
@@ -10,24 +15,73 @@ interface LoginData {
 export const LoginAction = async (data: LoginData) => {
   try {
     const { email, password } = data;
-    const result = await signIn("credentials", {
+    const respone = await signIn("credentials", {
       email,
       password,
       redirect: false,
     });
-    return result;
+    return { success: true };
   } catch (error) {
-    alerts("error", "Error en la autenticación");
+    return { error: "Error en la autenticación" };
   }
 };
 
-export const LoginGoogleAction = async () => {
+export const registerAction = async (values: any) => {
   try {
-    await signIn("google", {
-      callbackUrl: "/",
+    const registerDto = plainToInstance(RegisterDto, values);
+    const validationErrors = await validate(registerDto);
+    if (validationErrors.length > 0) {
+      return {
+        error: validationErrors
+          .map((err) => Object.values(err.constraints || {}))
+          .join(", "),
+      };
+    }
+
+    const user = await db.user.findUnique({
+      where: {
+        email: registerDto.email,
+      },
+      include: {
+        accounts: true,
+      },
+    });
+
+    if (user) {
+      const oauthAccounts = user.accounts.filter(
+        (account) => account.type === "oauth"
+      );
+      if (oauthAccounts.length > 0) {
+        return {
+          error:
+            "To confirm your identity, sign in with the same account you used originally.",
+        };
+      }
+      return {
+        error: "User already exists",
+      };
+    }
+
+    const passwordHash = await bcrypt.hash(registerDto.password, 10);
+
+    // Crear el usuario
+    await db.user.create({
+      data: {
+        email: registerDto.email,
+        name: registerDto.name,
+        password: passwordHash,
+        phone: registerDto.phone,
+      },
+    });
+
+    await signIn("credentials", {
+      email: registerDto.email,
+      password: registerDto.password,
       redirect: false,
     });
+
+    return { success: true };
   } catch (error) {
-    alerts("error", "Error en la autenticación");
+    return { error: "error 500" };
   }
 };

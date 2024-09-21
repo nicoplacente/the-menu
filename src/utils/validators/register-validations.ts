@@ -16,7 +16,7 @@ export class RegisterDto {
   @Matches(/^[a-zA-Z\s]+$/, {
     message: "El nombre solo puede contener letras y espacios",
   })
-  fullName!: string;
+  name!: string;
 
   @IsNotEmpty({ message: "El teléfono es obligatorio" })
   @Matches(/^[0-9]+$/, { message: "El teléfono debe contener solo números" })
