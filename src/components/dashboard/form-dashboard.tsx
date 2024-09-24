@@ -3,7 +3,7 @@
 import { IconUserCircle } from "@tabler/icons-react";
 import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
-import Input from "./ui/inputLogin";
+import Input from "../ui/inputLogin";
 
 export default function FormDashboard() {
   const { data: session } = useSession();

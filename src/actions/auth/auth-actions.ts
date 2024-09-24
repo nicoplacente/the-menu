@@ -1,6 +1,6 @@
 "use server";
 
-import { signIn } from "@/auth";
+import { signIn } from "@/libs/auth";
 import bcrypt from "bcryptjs";
 import db from "@/libs/prisma";
 import { validate } from "class-validator";

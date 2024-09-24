@@ -1,6 +1,6 @@
 "use server";
-import AsideBar from "@/components/aside-bar-dashboard";
-import FormDashboard from "@/components/form-dashboard";
+import AsideBar from "@/components/dashboard/aside-bar-dashboard";
+import FormDashboard from "@/components/dashboard/form-dashboard";
 
 const Dashboard: React.FC = async () => {
   return (

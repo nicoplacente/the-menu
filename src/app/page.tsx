@@ -14,10 +14,10 @@ interface PricingTypes {
 const pricing = [
   {
     id: "dyuhduawhdwau",
-    price: "$500.000",
+    price: "$30.000/mes",
     isMoreSale: false,
     title: "Plan Básico",
-    description: "Pago Único",
+    description: "Todo en una sola app",
     features: [
       "Mejora tu restaurante",
       "Crea tu carta digital única",
@@ -35,7 +35,7 @@ const pricing = [
   },
   {
     id: "udwahudaudauu",
-    price: "$40.000/mes",
+    price: "$50.000/mes",
     isMoreSale: true,
     title: "Plan Pro",
     description: "Todo en una sola app",

@@ -1,7 +1,7 @@
 "use server";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { ItemsSideBar } from "@/utils/items-sideBar";
-import LogoutButton from "./ui/logout-button";
+import LogoutButton from "../ui/logout-button";
 
 const AsideBar: React.FC = () => {
   return (
