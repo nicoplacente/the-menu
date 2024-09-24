@@ -7,6 +7,7 @@ export default function ValidateDynamicPath(pathname: string) {
     "/create-card",
     "/reset-password",
     "/terminos-y-condiciones",
+    "/dashboard",
   ];
 
   if (isDynamicPage && !excludedPaths.includes(pathname)) {
