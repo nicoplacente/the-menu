@@ -1,33 +1,39 @@
 "use client";
-import { LoginAction, LoginGoogleAction } from "@/actions/auth/auth-actions";
 import Input from "@/components/ui/inputLogin";
-import React, { useEffect } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { alerts } from "@/utils/alerts";
 import { Button } from "@/components/ui/button";
-import { useSession } from "next-auth/react";
-import Image from "next/image";
 import Link from "next/link";
+import { validateLogin } from "@/utils/validators/login-validations";
+import { LoginAction } from "@/actions/auth/auth-actions";
+import { LoginGoogleAction } from "@/actions/auth/login-google";
 
 const Login = () => {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm();
   const router = useRouter();
-  const { data: session } = useSession();
-  useEffect(() => {
-    if (session?.user) {
-      router.push("/");
-    }
-  }, [session]);
 
   const onSubmit = async (data: any) => {
-    const result = await LoginAction(data);
+    const validationErrors = await validateLogin(data);
 
-    if (result?.error || !result || result.status === 401) {
-      alerts("error", "Ha ocurrido un error al iniciar sesión");
-    } else if (result.status === 200) {
-      alerts("success", "Inicio de sesión correcto");
-      router.push("/");
+    if (validationErrors) {
+      Object.keys(validationErrors).forEach((key) => {
+        setError(key, { message: validationErrors[key] });
+      });
+      return;
+    }
+
+    const response = await LoginAction(data);
+    if (response.error) {
+      alerts("error", response?.error);
+    } else {
+      router.push("/dashboard");
     }
   };
 
@@ -68,12 +74,14 @@ const Login = () => {
           placeholder="Email"
           name="email"
           register={register}
+          error={errors.email?.message}
         />
         <Input
           type="password"
           placeholder="Contraseña"
           name="password"
           register={register}
+          error={errors.password?.message}
         />
 
         <Button txt="Iniciar Sesión" />

@@ -1,37 +1,26 @@
 "use client";
 
-import { IconLogin2 } from "@tabler/icons-react";
-import { signOut, useSession } from "next-auth/react";
+import { IconLogin2, IconUser } from "@tabler/icons-react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { HeaderButtonNotHover } from "../ui/header-button";
-import { Button } from "../ui/button";
 
 export default function ClientSessionheader() {
   const { data: session } = useSession();
   return (
     <>
       {session?.user ? (
-        <div className="flex items-center m-2 gap-4 p-2 ">
-          <div>
-            <Link href="/dashboard">
-              <img
-                src={session?.user?.image ?? "/default-avatar.png"}
-                alt="Avatar"
-                className="size-14 rounded-full object-cover cursor-pointer"
-              />
-            </Link>
-          </div>
-          <div>
-            <Button
-              txt="Logout"
-              onclick={async () => {
-                await signOut({
-                  callbackUrl: "/",
-                });
-              }}
+        <Link href="/dashboard" className="-mt-2">
+          {session?.user?.image ? (
+            <img
+              src={session?.user?.image}
+              alt="Avatar"
+              className="size-16 rounded-full object-cover cursor-pointer"
             />
-          </div>
-        </div>
+          ) : (
+            <IconUser className="size-16 text-white border-2 rounded-full p-4" />
+          )}
+        </Link>
       ) : (
         <HeaderButtonNotHover href="/auth/login">
           Iniciar Sesión

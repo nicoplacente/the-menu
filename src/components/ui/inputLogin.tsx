@@ -1,24 +1,30 @@
 import React, { useState } from "react";
 import { UseFormRegister } from "react-hook-form";
 import { IconEye, IconEyeClosed } from "@tabler/icons-react";
+
 interface InputProps {
   type: string;
   placeholder?: string;
   style?: string;
   name: string;
   register: UseFormRegister<any>;
+  error?: any;
 }
+
 const Input: React.FC<InputProps> = ({
   type,
   placeholder,
   style,
   name,
   register,
+  error,
 }) => {
   const [inputType, setInputType] = useState(type);
+
   const togglePasswordVisibility = () => {
     setInputType((prevType) => (prevType === "password" ? "text" : "password"));
   };
+
   return (
     <div className="relative w-full">
       <input
@@ -26,6 +32,9 @@ const Input: React.FC<InputProps> = ({
         type={inputType}
         placeholder={placeholder}
         className={`${style} outline-none text-sm py-2 px-4 rounded-lg text-black w-full`}
+        // className={`${style} ${
+        //   error ? "border-red-500" : ""
+        // } outline-none text-sm py-2 px-4 rounded-lg placeholder:text-black text-black w-full`}
       />
       {type === "password" && (
         <button
@@ -37,6 +46,7 @@ const Input: React.FC<InputProps> = ({
           {inputType === "password" ? <IconEye /> : <IconEyeClosed />}
         </button>
       )}
+      {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
     </div>
   );
 };
