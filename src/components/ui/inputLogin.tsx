@@ -31,9 +31,10 @@ const Input: React.FC<InputProps> = ({
         {...register(name)}
         type={inputType}
         placeholder={placeholder}
-        className={`${style} ${
-          error ? "border-red-500" : ""
-        } outline-none text-sm py-2 px-4 rounded-lg placeholder:text-black text-black w-full`}
+        className={`${style} outline-none text-sm py-2 px-4 rounded-lg text-black w-full`}
+        // className={`${style} ${
+        //   error ? "border-red-500" : ""
+        // } outline-none text-sm py-2 px-4 rounded-lg placeholder:text-black text-black w-full`}
       />
       {type === "password" && (
         <button

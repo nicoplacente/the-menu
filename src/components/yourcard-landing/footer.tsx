@@ -1,9 +1,14 @@
+"use client";
+
+import ValidateDynamicPath from "@/libs/validateDynamicPath";
+
 import Image from "next/image";
 import Link from "next/link";
 import {
   IconBrandInstagram,
   IconBrandDiscordFilled,
 } from "@tabler/icons-react";
+import { usePathname } from "next/navigation";
 
 const REDES = [
   {
@@ -19,6 +24,10 @@ const REDES = [
 ];
 
 export default function Footer() {
+  const pathname = usePathname();
+
+  if (!ValidateDynamicPath(pathname)) return null;
+
   return (
     <footer className="bg-gray-900">
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">

@@ -1,6 +1,6 @@
-import SectionContainer from "@/components/section-container";
-import PricingCard from "@/components/pricing-card";
-import YourcardInfo from "@/components/yourcard-info";
+import PricingCard from "@/components/yourcard-landing/pricing-card";
+import SectionContainer from "@/components/yourcard-landing/section-container";
+import YourcardInfo from "@/components/yourcard-landing/yourcard-info";
 
 interface PricingTypes {
   id: string;
@@ -58,6 +58,7 @@ export default function Home() {
   return (
     <main>
       <SectionContainer
+        className="text-white"
         id="planes"
         title="YourCard"
         description="Elegí el plan ideal para vos"
@@ -70,6 +71,7 @@ export default function Home() {
       </SectionContainer>
 
       <SectionContainer
+        className="text-white"
         id="info"
         title="¿Qué es YourCard?"
         description="La solución definitiva para llevar tu restaurante al

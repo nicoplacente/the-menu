@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-import MobileNav from "./mobile-nav";
+import MobileNav from "../yourcard-landing/mobile-nav";
 
 export default function MobileHeaderButton() {
   const [isOpenNav, setIsOpenNav] = useState(false);

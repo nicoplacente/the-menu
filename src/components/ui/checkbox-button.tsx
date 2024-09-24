@@ -1,3 +1,6 @@
+import Link from "next/link";
+
+export default function CheckBoxButton() {
 import { UseFormRegister } from "react-hook-form";
 
 interface CheckProps {
@@ -12,6 +15,15 @@ export const CheckBoxButton: React.FC<CheckProps> = ({
   register,
 }) => {
   return (
+    <label className="container">
+      <input type="checkbox" />
+      <div className="checkmark"></div>
+      <Link
+        href="/terminos-y-condiciones"
+        className="text-sm text-white [user-select:none] hover:underline"
+      >
+        Acepto los términos y condiciones
+      </Link>
     <label className="container flex flex-col">
       <div className="container flex items-center">
         <input type="checkbox" {...register(name)} />
