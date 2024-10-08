@@ -29,7 +29,6 @@ const pricing = [
     notFeatures: [
       "Destaca el plato del día",
       "Gestión de reservas",
-      "Gestión de delivery",
       "Acceso al soporte para modificaciónes únicas y personalizadas",
     ],
   },
@@ -48,7 +47,6 @@ const pricing = [
       "Obtendrás un código QR con acceso directo a la carta",
       "Destaca el plato del día",
       "Gestión de reservas",
-      "Gestión de delivery",
       "Acceso al soporte para modificaciónes únicas y personalizadas",
     ],
   },

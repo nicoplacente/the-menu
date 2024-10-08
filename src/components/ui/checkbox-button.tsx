@@ -12,16 +12,18 @@ export const CheckBoxButton: React.FC<CheckProps> = ({
   register,
 }) => {
   return (
-    <label className="container">
-      <input type="checkbox" {...register(name)} />
-      <div className="checkmark"></div>
-      <Link
-        href="/terminos-y-condiciones"
-        className="text-sm text-white [user-select:none] hover:underline"
-      >
-        Acepto los términos y condiciones
-      </Link>
-      {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
-    </label>
+    <>
+      <label className="container">
+        <input type="checkbox" {...register(name)} />
+        <div className="checkmark"></div>
+        <Link
+          href="/terminos-y-condiciones"
+          className="text-sm text-white [user-select:none] hover:underline"
+        >
+          Acepto los términos y condiciones
+        </Link>
+      </label>
+      {error && <p className="text-red-500 text-xs">{error}</p>}
+    </>
   );
 };

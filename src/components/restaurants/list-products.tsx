@@ -33,7 +33,7 @@ export default function ListProducts({
         </span>
       </div>
       {product.description && (
-        <Parrafos className="!text-start !text-xs sm:!text-sm ">
+        <Parrafos className="!text-start !text-xs sm:!text-sm">
           {product.description}
         </Parrafos>
       )}
