@@ -1,12 +1,10 @@
 "use server";
-import AsideBar from "@/components/dashboard/aside-bar-dashboard";
-import FormDashboard from "@/components/dashboard/form-dashboard";
+import { DynamicComponent } from "@/components/dashboard/dinamic-component";
 
 const Dashboard: React.FC = async () => {
   return (
-    <section className="flex justify-between p-4">
-      <AsideBar />
-      <FormDashboard />
+    <section>
+      <DynamicComponent />
     </section>
   );
 };

@@ -5,7 +5,7 @@ interface Item {
 
 export const ItemsSideBar: Item[] = [
   {
-    txt: "Perfil",
+    txt: "Administrar Perfil",
     icono: "",
   },
   {

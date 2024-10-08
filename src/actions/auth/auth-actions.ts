@@ -64,7 +64,6 @@ export const registerAction = async (values: any) => {
 
     const passwordHash = await bcrypt.hash(registerDto.password, 10);
 
-    // Crear el usuario
     await db.user.create({
       data: {
         email: registerDto.email,

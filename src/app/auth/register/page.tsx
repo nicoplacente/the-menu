@@ -1,6 +1,6 @@
 "use server";
 
-import { FormRegister } from "@/components/form-register";
+import { FormRegister } from "@/components/forms/form-register";
 
 const Register = () => {
   return (

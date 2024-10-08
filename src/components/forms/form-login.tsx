@@ -1,15 +1,16 @@
 "use client";
-import { registerAction } from "@/actions/auth/auth-actions";
 import Input from "@/components/ui/inputLogin";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { alerts } from "@/utils/alerts";
 import { Button } from "@/components/ui/button";
-import { CheckBoxButton } from "@/components/ui/checkbox-button";
 import Link from "next/link";
-import { validateRegister } from "@/utils/validators/register-validations";
+import { validateLogin } from "@/utils/validators/login-validations";
+import { LoginAction } from "@/actions/auth/auth-actions";
 import { LoginGoogleAction } from "@/actions/auth/login-google";
-export const FormRegister = () => {
+
+export const FormLogin = () => {
   const {
     register,
     handleSubmit,
@@ -17,28 +18,28 @@ export const FormRegister = () => {
     formState: { errors },
   } = useForm();
   const router = useRouter();
+
   const onSubmit = async (data: any) => {
-    try {
-      const validationErrors = await validateRegister(data);
-      if (validationErrors) {
-        Object.keys(validationErrors).forEach((field) => {
-          setError(field, {
-            type: "manual",
-            message: validationErrors[field],
-          });
-        });
-        return;
-      }
-      const result = await registerAction(data);
-    } catch (error) {
-      console.error("Error:", error);
+    const validationErrors = await validateLogin(data);
+
+    if (validationErrors) {
+      Object.keys(validationErrors).forEach((key) => {
+        setError(key, { message: validationErrors[key] });
+      });
+      return;
+    }
+
+    const response = await LoginAction(data);
+    if (response.error) {
+      alerts("error", response?.error);
+    } else {
+      router.push("/dashboard");
     }
   };
 
   const SubmitGoogle = async () => {
     await LoginGoogleAction();
   };
-
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -62,20 +63,6 @@ export const FormRegister = () => {
       </div>
       <Input
         type="text"
-        placeholder="Nombre y Apellido"
-        name="name"
-        register={register}
-        error={errors.name?.message}
-      />
-      <Input
-        type="text"
-        placeholder="Telefono"
-        name="phone"
-        register={register}
-        error={errors.phone?.message}
-      />
-      <Input
-        type="text"
         placeholder="Email"
         name="email"
         register={register}
@@ -88,17 +75,16 @@ export const FormRegister = () => {
         register={register}
         error={errors.password?.message}
       />
-      <CheckBoxButton
-        name="terms"
-        register={register}
-        error={errors.terms?.message}
-      />
-      <Button txt="Registrarse" />
+
+      <Button txt="Iniciar Sesión" />
       <div className="flex flex-col justify-center items-center gap-4 text-white">
+        <Link className="hover:underline" href="/reset-password">
+          ¿Has olvidado tu contraseña?
+        </Link>
         <p>
-          ¿Ya tienes una cuenta?{" "}
-          <Link href="/auth/login" className="hover:underline">
-            Inicia Sesión
+          ¿Todavia no tienes una cuenta?{" "}
+          <Link href="/auth/register" className="hover:underline">
+            Registrate
           </Link>
         </p>
       </div>
