@@ -38,7 +38,7 @@ export const FormLogin = () => {
   };
 
   const SubmitGoogle = async () => {
-    await LoginGoogleAction();
+    const response = await LoginGoogleAction();
   };
   return (
     <form

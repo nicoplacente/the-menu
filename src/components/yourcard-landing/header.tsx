@@ -10,7 +10,6 @@ import ValidateDynamicPath from "@/libs/validateDynamicPath";
 
 export default function Header() {
   const pathname = usePathname();
-
   if (!ValidateDynamicPath(pathname)) return null;
   return (
     <header className="flex sticky top-0 z-50 items-center justify-between py-4 px-6 bg-black/20 backdrop-blur">
