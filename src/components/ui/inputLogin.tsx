@@ -26,28 +26,27 @@ const Input: React.FC<InputProps> = ({
   };
 
   return (
-    <div className="relative w-full">
-      <input
-        {...register(name)}
-        type={inputType}
-        placeholder={placeholder}
-        className={`${style} outline-none text-sm py-2 px-4 rounded-lg text-black w-full`}
-        // className={`${style} ${
-        //   error ? "border-red-500" : ""
-        // } outline-none text-sm py-2 px-4 rounded-lg placeholder:text-black text-black w-full`}
-      />
-      {type === "password" && (
-        <button
-          type="button"
-          onClick={togglePasswordVisibility}
-          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-black"
-          aria-label="Toggle password visibility"
-        >
-          {inputType === "password" ? <IconEye /> : <IconEyeClosed />}
-        </button>
-      )}
-      {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
-    </div>
+    <>
+      <div className="relative w-full">
+        <input
+          {...register(name)}
+          type={inputType}
+          placeholder={placeholder}
+          className={`${style} outline-none text-sm py-2 px-4 rounded-lg text-black w-full`}
+        />
+        {type === "password" && (
+          <button
+            type="button"
+            onClick={togglePasswordVisibility}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-black"
+            aria-label="Toggle password visibility"
+          >
+            {inputType === "password" ? <IconEye /> : <IconEyeClosed />}
+          </button>
+        )}
+      </div>
+      {error && <p className="text-red-500 text-xs">{error}</p>}
+    </>
   );
 };
 

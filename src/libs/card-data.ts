@@ -10,22 +10,31 @@ const PRODUCTS: { [key: string]: Product[] } = {
     {
       categoryId: "",
       name: "Pizza primavera",
+      productImage: null,
       price: 3000,
       isStock: true,
       description: "La pizza es mas grande que las pijas que se come tu vieja",
     },
-    { categoryId: "", name: "Pizza de anana", price: 931000, isStock: true },
+    {
+      categoryId: "",
+      name: "Pizza de anana",
+      productImage: null,
+      price: 931000,
+      isStock: true,
+    },
   ],
   cafe: [
     {
       categoryId: "conazucar",
       name: "Café de vainilla",
+      productImage: null,
       price: 2000,
       isStock: true,
     },
     {
       categoryId: "sinazucar",
       name: "Café con leche",
+      productImage: null,
       price: 4000,
       isStock: true,
       description: "El cafe esta repetido xd",
@@ -33,24 +42,28 @@ const PRODUCTS: { [key: string]: Product[] } = {
     {
       categoryId: "conazucar",
       name: "Café de vainilla",
+      productImage: null,
       price: 2000,
       isStock: true,
     },
     {
       categoryId: "sinazucar",
       name: "Café con leche",
+      productImage: null,
       price: 4000,
       isStock: false,
     },
     {
       categoryId: "otracategoria2",
       name: "Café de vainilla",
+      productImage: null,
       price: 2000,
       isStock: true,
     },
     {
       categoryId: "otracategoria",
       name: "Café con leche",
+      productImage: null,
       price: 4000,
       isStock: false,
       description: "El cafe esta repetido xd",
@@ -58,12 +71,14 @@ const PRODUCTS: { [key: string]: Product[] } = {
     {
       categoryId: "otracategoria",
       name: "Café de vainilla",
+      productImage: null,
       price: 2000,
       isStock: true,
     },
     {
       categoryId: "otracategoria2",
       name: "Café con leche",
+      productImage: null,
       price: 4000,
       isStock: false,
     },
@@ -74,9 +89,9 @@ export const CARDS: Card[] = [
   {
     appId: "lamestiza",
     appName: "La Mestiza",
-    textColor: "#000",
-    bgColor: "#e3e3e3",
-    primaryColor: "#48e",
+    textColor: "#fff",
+    bgColor: "#171717",
+    primaryColor: "#92f",
     isTitleVisible: true,
     image:
       "https://imgs.search.brave.com/OVvv9uw84YybYQv9l4S63ug70CHJibpR-di4APeDDQE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/bG9nb2FpLmNvbS9v/c3MvaWNvbnMvMjAy/MS8xMC8yNy9sMWVY/VHhtMnc3VE02dDku/cG5n",
@@ -85,12 +100,14 @@ export const CARDS: Card[] = [
       {
         id: "pizzas",
         name: "Pizzas",
+        categoryImage: null,
         subcategories: null,
         products: PRODUCTS.pizzas,
       },
       {
         id: "cafe",
         name: "Café",
+        categoryImage: null,
         subcategories: [
           {
             id: "conazucar",
@@ -114,11 +131,13 @@ export const CARDS: Card[] = [
       {
         id: "helados",
         name: "Helados",
+        categoryImage: null,
         products: null,
       },
       {
         id: "bebidas",
         name: "Bebidas",
+        categoryImage: null,
         products: null,
       },
     ],
