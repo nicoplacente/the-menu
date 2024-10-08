@@ -30,6 +30,9 @@ export const FormRegister = () => {
         return;
       }
       const result = await registerAction(data);
+      if (result.success === true) {
+        router.push("/dashboard");
+      }
     } catch (error) {
       console.error("Error:", error);
     }

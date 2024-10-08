@@ -1,5 +1,4 @@
 "use client";
-
 import { IconLogin2, IconUser } from "@tabler/icons-react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";

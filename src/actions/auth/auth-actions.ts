@@ -15,7 +15,7 @@ interface LoginData {
 export const LoginAction = async (data: LoginData) => {
   try {
     const { email, password } = data;
-    const respone = await signIn("credentials", {
+    const response = await signIn("credentials", {
       email,
       password,
       redirect: false,
@@ -64,7 +64,6 @@ export const registerAction = async (values: any) => {
 
     const passwordHash = await bcrypt.hash(registerDto.password, 10);
 
-    // Crear el usuario
     await db.user.create({
       data: {
         email: registerDto.email,
@@ -72,12 +71,6 @@ export const registerAction = async (values: any) => {
         password: passwordHash,
         phone: registerDto.phone,
       },
-    });
-
-    await signIn("credentials", {
-      email: registerDto.email,
-      password: registerDto.password,
-      redirect: false,
     });
 
     return { success: true };

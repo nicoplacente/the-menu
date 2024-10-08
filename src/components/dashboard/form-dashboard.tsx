@@ -4,11 +4,25 @@ import { IconUserCircle } from "@tabler/icons-react";
 import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import Input from "../ui/inputLogin";
+import { useEffect } from "react";
+import { redirect } from "next/navigation";
 
-export default function FormDashboard() {
-  const { data: session } = useSession();
+export const FormDashboard: React.FC = () => {
+  const { data: session, status } = useSession();
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      redirect("/");
+    }
+  }, [status]);
+
   const { register, handleSubmit } = useForm();
   const onSubmit = () => {};
+
+  if (status === "loading") {
+    return <div>Cargando...</div>;
+  }
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -61,4 +75,4 @@ export default function FormDashboard() {
       </span>
     </form>
   );
-}
+};

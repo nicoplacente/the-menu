@@ -4,7 +4,7 @@ import React from "react";
 
 interface ButtonProps {
   txt: string;
-  onclick?: React.MouseEventHandler<HTMLButtonElement>;
+  onclick?: () => void;
 }
 
 export function Button({ txt, onclick }: ButtonProps) {
