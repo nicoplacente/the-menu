@@ -5,7 +5,8 @@ import { signIn } from "next-auth/react";
 
 export const LoginGoogleAction = async () => {
   try {
-    await signIn("google");
+    const result = await signIn("google", { callbackUrl: "/dashboard" });
+    return result;
   } catch (error) {
     alerts("error", "Error en la autenticación");
   }

@@ -6,7 +6,11 @@ import prisma from "./prisma";
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
   ...authConfig,
-  session: { strategy: "jwt" },
+  session: {
+    strategy: "jwt",
+    maxAge: 60 * 60,
+    updateAge: 10,
+  },
   callbacks: {
     jwt: async ({ token, user }) => {
       if (user) {
