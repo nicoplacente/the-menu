@@ -10,9 +10,7 @@ interface AsideBarProps {
 }
 
 const AsideBar: React.FC<AsideBarProps> = ({ onSelect }) => {
-  const { data: session, status } = useSession();
-  console.log(session);
-
+  const { data: session } = useSession();
   return (
     <aside className="flex flex-col max-w-52 w-full border-2 p-6">
       <ul>

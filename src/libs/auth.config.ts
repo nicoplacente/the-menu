@@ -14,24 +14,20 @@ export default {
             email: credentials?.email as string,
           },
         });
-
         if (!user) {
           throw new Error("Usuario no encontrado");
         }
-
         const validPassword = await bcrypt.compare(
           credentials?.password as string,
           user.password as string
         );
         if (!validPassword) {
-          throw new Error("Password incorrect");
+          throw new Error("Contraseña incorrecta");
         }
-
         return {
           id: user.id,
           name: user.name || "",
           email: user.email,
-          password: user.password,
           image: user.image,
           phone: user.phone || "",
         };

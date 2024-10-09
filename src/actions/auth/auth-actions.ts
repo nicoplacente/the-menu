@@ -20,6 +20,9 @@ export const LoginAction = async (data: LoginData) => {
       password,
       redirect: false,
     });
+    if (response?.error) {
+      return { success: false, error: response.error };
+    }
     return { success: true };
   } catch (error) {
     return { error: "Error en la autenticación" };

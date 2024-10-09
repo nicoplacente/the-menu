@@ -9,6 +9,7 @@ import Link from "next/link";
 import { validateLogin } from "@/utils/validators/login-validations";
 import { LoginAction } from "@/actions/auth/auth-actions";
 import { LoginGoogleAction } from "@/actions/auth/login-google";
+import { useSession } from "next-auth/react";
 
 export const FormLogin = () => {
   const {
@@ -18,7 +19,7 @@ export const FormLogin = () => {
     formState: { errors },
   } = useForm();
   const router = useRouter();
-
+  const { update } = useSession();
   const onSubmit = async (data: any) => {
     const validationErrors = await validateLogin(data);
 
@@ -30,15 +31,20 @@ export const FormLogin = () => {
     }
 
     const response = await LoginAction(data);
-    if (response.error) {
-      alerts("error", response?.error);
-    } else {
+    if (response.success === true) {
+      await update();
       router.push("/dashboard");
+      alerts("success", "Inicio de Sesion Correcto");
+    } else {
+      alerts("error", response.error || "Ocurrió un error al iniciar sesión");
     }
   };
 
   const SubmitGoogle = async () => {
-    const response = await LoginGoogleAction();
+    const result = await LoginGoogleAction();
+    if (result?.ok) {
+      router.push("/dashboard");
+    }
   };
   return (
     <form
