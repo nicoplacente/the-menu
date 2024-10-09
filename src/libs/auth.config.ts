@@ -26,10 +26,10 @@ export default {
         }
         return {
           id: user.id,
-          name: user.name || "",
+          name: user.name as string,
           email: user.email,
           image: user.image,
-          phone: user.phone || "",
+          phone: user.phone as string,
         };
       },
     }),

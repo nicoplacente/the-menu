@@ -34,9 +34,8 @@ export const FormLogin = () => {
     if (response.success === true) {
       await update();
       router.push("/dashboard");
-      alerts("success", "Inicio de Sesion Correcto");
     } else {
-      alerts("error", response.error || "Ocurrió un error al iniciar sesión");
+      alerts("error", "Ocurrió un error al iniciar sesión");
     }
   };
 

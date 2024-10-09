@@ -73,9 +73,9 @@ export const registerAction = async (values: any) => {
         name: registerDto.name,
         password: passwordHash,
         phone: registerDto.phone,
+        terms: registerDto.terms,
       },
     });
-
     return { success: true };
   } catch (error) {
     return { error: "error 500" };
