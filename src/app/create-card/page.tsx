@@ -1,8 +1,14 @@
 import { createApp } from "@/actions/app/app-actions";
 import YesNoButton from "@/components/dashboard/yes-no-button";
 import SectionContainer from "@/components/yourcard-landing/section-container";
+import { auth } from "@/libs/auth";
+import { redirect } from "next/navigation";
 
-export default function CreateCard() {
+export default async function CreateCard() {
+  const session = await auth();
+  if (!session) {
+    redirect("/auth/login");
+  }
   return (
     <SectionContainer
       className="text-white"

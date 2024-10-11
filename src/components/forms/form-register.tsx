@@ -9,6 +9,8 @@ import { CheckBoxButton } from "@/components/ui/checkbox-button";
 import Link from "next/link";
 import { validateRegister } from "@/utils/validators/register-validations";
 import { LoginGoogleAction } from "@/actions/auth/login-google";
+import { useSession } from "next-auth/react";
+import { alerts } from "@/utils/alerts";
 export const FormRegister = () => {
   const {
     register,
@@ -17,6 +19,7 @@ export const FormRegister = () => {
     formState: { errors },
   } = useForm();
   const router = useRouter();
+  const { update } = useSession();
   const onSubmit = async (data: any) => {
     try {
       const validationErrors = await validateRegister(data);
@@ -31,10 +34,12 @@ export const FormRegister = () => {
       }
       const result = await registerAction(data);
       if (result.success === true) {
-        router.push("/dashboard");
+        await update();
+        router.push("/auth/login");
+        alerts("success", "Registro realizado correctamente");
       }
     } catch (error) {
-      console.error("Error:", error);
+      alerts("error", "Ocurrió un error al registrar el usuario");
     }
   };
 

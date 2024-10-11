@@ -21,6 +21,7 @@ model User {
   emailVerified DateTime?
   image         String?
   phone         String?
+  terms         Boolean   @default(false)
   app           App[]
   accounts      Account[]
 }
