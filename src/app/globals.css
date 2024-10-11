@@ -134,25 +134,3 @@
     rotate: 0;
   }
 }
-
-/* Create card form styles */
-
-.create-card-form label {
-  @apply flex flex-col gap-3 w-1/3 max-w-full p-4 rounded-lg bg-gray-900 shadow-lg shadow-white/5 min-w-full h-32;
-}
-
-.create-card-form input {
-  @apply outline-none text-sm py-2 px-4 rounded-lg text-black w-full;
-}
-
-.create-card-form input[type="color"] {
-  @apply w-full p-0;
-}
-
-.create-card-form h3 {
-  @apply font-semibold;
-}
-
-.create-card-form p {
-  @apply text-xs sm:text-sm text-white/70 text-pretty;
-}

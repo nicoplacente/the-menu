@@ -68,7 +68,7 @@ model App {
 }
 
 model Category {
-  id            String        @id @default(cuid())
+  id            String        @id @unique
   name          String
   categoryImage String?
   subcategories Subcategory[]
