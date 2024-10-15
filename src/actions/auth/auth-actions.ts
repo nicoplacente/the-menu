@@ -12,6 +12,10 @@ interface LoginData {
   password: string;
 }
 
+interface ResetPassword {
+  email: string;
+}
+
 export const LoginAction = async (data: LoginData) => {
   try {
     const { email, password } = data;
@@ -79,5 +83,31 @@ export const registerAction = async (values: any) => {
     return { success: true };
   } catch (error) {
     return { error: "error 500" };
+  }
+};
+
+export const resetPasswordAction = async (data: ResetPassword) => {
+  try {
+    const user = await db.user.findUnique({
+      where: {
+        email: data.email,
+      },
+      select: {
+        email: true,
+        name: true,
+        emailVerified: true,
+      },
+    });
+
+    if (!user) {
+      return { error: "Usuario no encontrado" };
+    }
+
+    return {
+      success: true,
+      message: "Email enviado, revisa tu correo electronico",
+    };
+  } catch (error) {
+    return { error: "Error en la solicitud" };
   }
 };

@@ -1,6 +1,6 @@
 "use client";
 import Input from "@/components/ui/inputLogin";
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { alerts } from "@/utils/alerts";
@@ -10,8 +10,10 @@ import { validateLogin } from "@/utils/validators/login-validations";
 import { LoginAction } from "@/actions/auth/auth-actions";
 import { LoginGoogleAction } from "@/actions/auth/login-google";
 import { useSession } from "next-auth/react";
+import { Modal } from "../ui/modal";
 
 export const FormLogin = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const {
     register,
     handleSubmit,
@@ -20,6 +22,7 @@ export const FormLogin = () => {
   } = useForm();
   const router = useRouter();
   const { update } = useSession();
+
   const onSubmit = async (data: any) => {
     const validationErrors = await validateLogin(data);
 
@@ -45,6 +48,11 @@ export const FormLogin = () => {
       router.push("/dashboard");
     }
   };
+
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -83,16 +91,17 @@ export const FormLogin = () => {
 
       <Button txt="Iniciar Sesión" />
       <div className="flex flex-col justify-center items-center gap-4 text-white">
-        <Link className="hover:underline" href="/reset-password">
+        <button type="button" className="hover:underline" onClick={toggleModal}>
           ¿Has olvidado tu contraseña?
-        </Link>
+        </button>
         <p>
-          ¿Todavia no tienes una cuenta?{" "}
+          ¿Todavia no tienes una cuenta?
           <Link href="/auth/register" className="hover:underline">
             Registrate
           </Link>
         </p>
       </div>
+      {isModalOpen && <Modal onclick={toggleModal} />}
     </form>
   );
 };
