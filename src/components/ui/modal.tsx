@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { resetPasswordAction } from "@/actions/auth/auth-actions";
 import { alerts } from "@/utils/alerts";
 
 interface ModalProps {
@@ -12,7 +11,6 @@ export function Modal({ onclick }: ModalProps) {
   const {
     register,
     handleSubmit,
-    setError,
     formState: { errors },
   } = useForm();
 
@@ -29,6 +27,7 @@ export function Modal({ onclick }: ModalProps) {
       const result = await response.json();
       if (response.ok) {
         alerts("success", "Correo de restablecimiento enviado");
+        onclick();
       } else {
         alerts("error", result.error || "Ocurrió un error al enviar el correo");
       }
