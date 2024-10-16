@@ -58,7 +58,7 @@ export default function Home() {
       <SectionContainer
         className="text-white"
         id="planes"
-        title="YourCard"
+        title="TheMenu"
         description="Elegí el plan ideal para vos"
       >
         <div className="flex flex-col-reverse md:flex-row items-center justify-center gap-12">
@@ -71,7 +71,7 @@ export default function Home() {
       <SectionContainer
         className="text-white"
         id="info"
-        title="¿Qué es YourCard?"
+        title="¿Qué es TheMenu?"
         description="La solución definitiva para llevar tu restaurante al
           siguiente nivel. "
       >

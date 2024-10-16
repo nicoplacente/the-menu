@@ -45,12 +45,12 @@ export default function YourcardInfo() {
           <p>
             ¿Necesitas cambios únicos? ¡No hay problema! Nuestro equipo está
             disponible para modificar tu carta según tus necesidades. Haz que tu
-            restaurante se destaque con YourCard.
+            restaurante se destaque con TheMenu.
           </p>
         </li>
 
-        <li className="info-li items-center">
-          <span>👉 YourCard:</span>
+        <li className="info-li">
+          <span>👉 TheMenu:</span>
           <p>La carta que transforma tu negocio.</p>
         </li>
 

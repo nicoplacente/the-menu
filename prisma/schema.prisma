@@ -58,10 +58,10 @@ model App {
   id             String     @id @unique
   appName        String     @unique
   categories     Category[]
-  textColor      String?    @default("#000")
-  bgColor        String?    @default("#FFF")
-  primaryColor   String?    @default("#48E")
-  image          String?
+  textColor      String
+  bgColor        String
+  primaryColor   String
+  image          String?    @default("")
   isImageRounded Boolean?   @default(true)
   isTitleVisible Boolean?   @default(false)
   User           User?      @relation(fields: [userId], references: [id])

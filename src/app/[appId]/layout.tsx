@@ -1,12 +1,14 @@
-import { CARDS } from "@/libs/card-data";
 import RestaurantHeader from "@/components/restaurants/restaurant-header";
+import prisma from "@/libs/prisma";
+
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
 }: {
   params: { appId: string };
 }) {
-  const appFound = CARDS.find((card) => card.appId === params.appId);
+  const appFound = await prisma.app.findUnique({ where: { id: params.appId } });
 
   if (!appFound) {
     return {
@@ -17,23 +19,26 @@ export async function generateMetadata({
   return {
     title: `${appFound.appName}`,
     description: `Descubre la carta de ${appFound.appName}. ¡No puedes perderte estos platos!`,
-    icons: { icon: appFound.image ?? "/yourcard.webp" },
+    icons: { icon: appFound.image ?? "/themenu.png" },
   };
 }
 
-export default function Layout({
+export default async function Layout({
   children,
   params,
 }: {
   children: React.ReactNode;
   params: { appId: string };
 }) {
-  const appFound = CARDS.find((card) => card.appId === params.appId);
+  const appFound = await prisma.app.findUnique({
+    where: { id: params.appId },
+    include: { categories: true },
+  });
 
   if (!appFound) {
     return (
-      <div>
-        <h1>Carta no encontrada</h1>
+      <div className="grid place-content-center h-screen">
+        <h1 className="text-white">Carta no encontrada</h1>
       </div>
     );
   }

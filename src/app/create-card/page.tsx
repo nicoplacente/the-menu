@@ -22,7 +22,7 @@ export default async function CreateCard() {
         <label>
           <h3>Nombre del restaurante</h3>
 
-          <input type="text" name="appName" />
+          <input type="text" name="appName" className="text-black" />
         </label>
 
         <label>
@@ -75,18 +75,18 @@ export default async function CreateCard() {
           <p>Si marcas que no, solo se verá la imagen de logo</p>
           <YesNoButton name="isTitleVisible" />
         </label>
+        <div className="flex justify-center">
+          <button
+            type="submit"
+            className="relative my-12 w-full sm:w-1/3 inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white text-white focus:ring-4 focus:outline-none focus:ring-pink-800"
+            aria-label="Iniciar sesión con Google"
+          >
+            <span className="mx-auto px-5 py-2.5 transition-all ease-in duration-75 bg-gray-900 w-full rounded-md group-hover:bg-opacity-0">
+              Continuar
+            </span>
+          </button>
+        </div>
       </form>
-      <div className="flex justify-center">
-        <button
-          type="submit"
-          className="relative my-12 w-full sm:w-1/3 inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white text-white focus:ring-4 focus:outline-none focus:ring-pink-800"
-          aria-label="Iniciar sesión con Google"
-        >
-          <span className="mx-auto px-5 py-2.5 transition-all ease-in duration-75 bg-gray-900 w-full rounded-md group-hover:bg-opacity-0">
-            Continuar
-          </span>
-        </button>
-      </div>
     </SectionContainer>
   );
 }
