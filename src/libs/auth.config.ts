@@ -3,7 +3,6 @@ import Credentials from "next-auth/providers/credentials";
 import prisma from "./prisma";
 import bcrypt from "bcryptjs";
 import Google from "next-auth/providers/google";
-
 export default {
   providers: [
     Google,
