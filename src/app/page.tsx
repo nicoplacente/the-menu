@@ -59,7 +59,7 @@ export default function Home() {
         className="text-white"
         id="planes"
         title="TheMenu"
-        description="Elegí el plan ideal para vos"
+        description="Elegí el plan ideal para vos. +100 bares y restaurantes usan este servicio"
       >
         <div className="flex flex-col-reverse md:flex-row items-center justify-center gap-12">
           {pricing.map((card: PricingTypes) => {

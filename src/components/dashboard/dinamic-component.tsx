@@ -6,7 +6,9 @@ import { CancelSub } from "./cancel-sub";
 import { MethodPayment } from "./method-payment";
 import { FormDashboard } from "./form-dashboard";
 import { Perfil } from "./perfil";
-export const DynamicComponent: React.FC = () => {
+import SectionContainer from "../yourcard-landing/section-container";
+
+export const DynamicComponent = () => {
   const [selectedComponent, setSelectedComponent] = useState<string>("Perfil");
 
   const renderComponent = () => {
@@ -24,9 +26,11 @@ export const DynamicComponent: React.FC = () => {
     }
   };
   return (
-    <section className="flex justify-between p-4">
-      <AsideBar onSelect={setSelectedComponent} />
-      <div className="flex-grow">{renderComponent()}</div>
-    </section>
+    <SectionContainer>
+      <div className="border-2">
+        <AsideBar onSelect={setSelectedComponent} />
+        <div className="flex-grow">{renderComponent()}</div>
+      </div>
+    </SectionContainer>
   );
 };

@@ -17,7 +17,7 @@ export default function Header() {
       <Link href="/">
         <span className="inline-flex rounded-full p-0.5 overflow-hidden bg-gradient-to-br from-pink-500 to-orange-400">
           <Image
-            src="/themenu.png"
+            src="/themenu.webp"
             className="rounded-full min-w-9 aspect-square size-9 lg:size-16 hover:opacity-70 transition duration-300 animate-pulse-one"
             alt="logo"
             width={500}

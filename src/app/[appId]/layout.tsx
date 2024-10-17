@@ -1,39 +1,35 @@
+"use client";
+
 import RestaurantHeader from "@/components/restaurants/restaurant-header";
-import prisma from "@/libs/prisma";
+import { App, Category } from "@prisma/client";
+import { useEffect, useState } from "react";
 
-export const dynamic = "force-dynamic";
-
-export async function generateMetadata({
-  params,
-}: {
-  params: { appId: string };
-}) {
-  const appFound = await prisma.app.findUnique({ where: { id: params.appId } });
-
-  if (!appFound) {
-    return {
-      title: "Carta no encontrada",
-    };
-  }
-
-  return {
-    title: `${appFound.appName}`,
-    description: `Descubre la carta de ${appFound.appName}. ¡No puedes perderte estos platos!`,
-    icons: { icon: appFound.image ?? "/themenu.png" },
-  };
+interface AppWithCategories extends App {
+  categories: Category[];
 }
 
-export default async function Layout({
+export default function Layout({
   children,
   params,
 }: {
   children: React.ReactNode;
   params: { appId: string };
 }) {
-  const appFound = await prisma.app.findUnique({
-    where: { id: params.appId },
-    include: { categories: true },
-  });
+  const [appFound, setAppFound] = useState<AppWithCategories | null>(null);
+
+  useEffect(() => {
+    const getApps = async () => {
+      const response = await fetch("/api/get-users-app");
+      const data = await response.json();
+
+      const filteredApp = data.foundApp.find(
+        (app: App) => app.id === params.appId
+      );
+      setAppFound(filteredApp);
+    };
+
+    getApps();
+  }, []);
 
   if (!appFound) {
     return (

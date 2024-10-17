@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   title: "TheMenu",
   description:
     "📱 TheMenu es la solución definitiva para llevar tu restaurante al siguiente nivel. Crea una carta digital única, fácil de usar y totalmente personalizable para que refleje la esencia de tu marca.✨ Destaca con lo mejor: Resalta el plato del día, ajusta precios y controla el stock en tiempo real. ¡Todo a tu alcance!🚀 Gestión total: Maneja las reservas desde una sola plataforma, optimizando el tiempo y brindando una experiencia superior a tus clientes.🔗 Códigos QR: Ofrece a tus comensales acceso rápido a tu carta digital con un simple escaneo. Sorpréndelos con una presentación moderna y profesional.🔧 Soporte personalizado: ¿Necesitas cambios únicos? ¡No hay problema! Nuestro equipo está disponible para modificar tu carta según tus necesidades.Haz que tu restaurante se destaque con TheMenu. ¡Empieza hoy mismo y genera una impresión inolvidable!👉 TheMenu: La app que transforma tu negocio.",
-  icons: { icon: "/themenu.png" },
+  icons: { icon: "/themenu.webp" },
 };
 
 export const viewport = {

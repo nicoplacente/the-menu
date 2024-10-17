@@ -10,6 +10,26 @@ interface Params {
 
 export const dynamic = "force-dynamic";
 
+export async function generateMetadata({
+  params,
+}: {
+  params: { appId: string };
+}) {
+  const appFound = await prisma.app.findUnique({ where: { id: params.appId } });
+
+  if (!appFound) {
+    return {
+      title: "Carta no encontrada",
+    };
+  }
+
+  return {
+    title: `${appFound.appName}`,
+    description: `Descubre la carta de ${appFound.appName}. ¡No puedes perderte estos platos!`,
+    icons: { icon: appFound.image ?? "/themenu.png" },
+  };
+}
+
 export default async function UserCard({ params }: { params: Params }) {
   const userCard = params.appId;
 
