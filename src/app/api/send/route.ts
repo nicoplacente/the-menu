@@ -65,7 +65,6 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ message: "Email enviado correctamente" });
   } catch (error) {
-    console.error(error);
     return NextResponse.json(
       {
         error: "Error interno del servidor",

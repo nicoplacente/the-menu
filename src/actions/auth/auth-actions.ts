@@ -6,6 +6,7 @@ import db from "@/libs/prisma";
 import { validate } from "class-validator";
 import { plainToInstance } from "class-transformer";
 import { RegisterDto } from "@/utils/validators/register-validations";
+import jwt, { JwtPayload } from "jsonwebtoken";
 
 interface LoginData {
   email: string;
@@ -13,7 +14,9 @@ interface LoginData {
 }
 
 interface ResetPassword {
-  email: string;
+  password: string;
+  passwordConfirm: string;
+  token: string;
 }
 
 export const LoginAction = async (data: LoginData) => {
@@ -88,14 +91,17 @@ export const registerAction = async (values: any) => {
 
 export const resetPasswordAction = async (data: ResetPassword) => {
   try {
+    const decoded = jwt.verify(data.token, process.env.JWT_SECRET || "");
+
+    if (typeof decoded === "string") {
+      return { error: "Token no válido" };
+    }
+
+    const { email } = decoded as JwtPayload;
+
     const user = await db.user.findUnique({
       where: {
-        email: data.email,
-      },
-      select: {
-        email: true,
-        name: true,
-        emailVerified: true,
+        email: email,
       },
     });
 
@@ -103,9 +109,24 @@ export const resetPasswordAction = async (data: ResetPassword) => {
       return { error: "Usuario no encontrado" };
     }
 
+    if (data.password !== data.passwordConfirm) {
+      return { error: "Las contraseñas no coinciden" };
+    }
+
+    const passwordHash = await bcrypt.hash(data.password, 10);
+
+    await db.user.update({
+      where: {
+        email: email,
+      },
+      data: {
+        password: passwordHash,
+      },
+    });
+
     return {
       success: true,
-      message: "Email enviado, revisa tu correo electronico",
+      message: "Contraseña actualizada correctamente",
     };
   } catch (error) {
     return { error: "Error en la solicitud" };

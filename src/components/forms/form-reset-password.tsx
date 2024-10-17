@@ -6,6 +6,9 @@ import { alerts } from "@/utils/alerts";
 import { validateResetPassword } from "@/utils/validators/reset-password-validations";
 import { useEffect, useState } from "react";
 import { VerifyToken } from "@/actions/auth/verifyToken";
+import { resetPasswordAction } from "@/actions/auth/auth-actions";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function ResetPasswordForm() {
   const {
@@ -15,6 +18,8 @@ export default function ResetPasswordForm() {
     formState: { errors },
   } = useForm();
   const [isClient, setIsClient] = useState(false);
+  const router = useRouter();
+  const { update } = useSession();
 
   useEffect(() => {
     const checkToken = async () => {
@@ -23,8 +28,8 @@ export default function ResetPasswordForm() {
         const token = params.get("token");
 
         if (!token) {
-          // window.location.href = "/auth/login";
           alerts("error", "Token inválido o inexistente");
+          router.push("/auth/login");
           return;
         }
         try {
@@ -32,12 +37,12 @@ export default function ResetPasswordForm() {
           if (response.valid) {
             setIsClient(true);
           } else {
-            // window.location.href = "/auth/login";
             alerts("error", "Token inválido");
+            router.push("/auth/login");
           }
         } catch (error) {
-          // window.location.href = "/auth/login";
           alerts("error", "Error al validar el token");
+          router.push("/auth/login");
         }
       }
     };
@@ -46,12 +51,25 @@ export default function ResetPasswordForm() {
 
   const onSubmit = async (data: any) => {
     const validationErrors = await validateResetPassword(data);
-
     if (validationErrors) {
       Object.keys(validationErrors).forEach((key) => {
         setError(key, { message: validationErrors[key] });
       });
       return;
+    }
+    const params = new URLSearchParams(window.location.search);
+    const tokenFromUrl = params.get("token");
+    const dataWithToken = {
+      ...data,
+      token: tokenFromUrl,
+    };
+    const response = await resetPasswordAction(dataWithToken);
+    if (response.success === true) {
+      await update();
+      alerts("success", response.message);
+      router.push("/");
+    } else {
+      alerts("error", "Ocurrió un error al iniciar sesión");
     }
   };
 
@@ -66,14 +84,14 @@ export default function ResetPasswordForm() {
     >
       <Input
         type="password"
-        placeholder="Contraseña"
+        placeholder="Ingresa la nueva contraseña"
         name="password"
         register={register}
         error={errors.password?.message}
       />{" "}
       <Input
         type="password"
-        placeholder="Confirmar Contraseña"
+        placeholder="Confirma la nueva contraseña"
         name="passwordConfirm"
         register={register}
         error={errors.passwordConfirm?.message}
