@@ -1,23 +1,25 @@
-"use client";
 import ListProducts from "@/components/restaurants/list-products";
 import SectionContainer from "@/components/yourcard-landing/section-container";
-import { CARDS } from "@/libs/card-data";
-import { useParams } from "next/navigation";
+import prisma from "@/libs/prisma";
 
-export default function CategoryPage() {
-  const { appId, categoryId } = useParams();
+interface Params {
+  appId: string;
+  categoryId: string;
+}
 
-  // Encuentra la carta del restaurante
-  const appFound = CARDS.find((card) => card.appId === appId);
+export default async function CategoryPage({ params }: { params: Params }) {
+  const appFound = await prisma.app.findUnique({
+    where: { id: params.appId },
+    include: { categories: true },
+  });
 
   if (!appFound) {
     return <div>No se encontró ninguna carta con ese nombre</div>;
   }
 
-  // Encuentra la categoría correspondiente
-  const categoryFound = appFound.categories.find(
-    (category) => category.id === categoryId
-  );
+  const categoryFound = await prisma.category.findUnique({
+    where: { id: params.categoryId },
+  });
 
   if (!categoryFound) {
     return <div>No se encontró la categoría</div>;

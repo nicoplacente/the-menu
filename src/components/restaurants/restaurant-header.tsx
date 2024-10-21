@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { App } from "@prisma/client";
 
-export default function RestaurantHeader({ app }: { app: App }) {
+export default async function RestaurantHeader({ app }: { app: App }) {
   return (
     <header
       className="px-0 py-9 sm:py-12 flex items-center gap-4 justify-center"

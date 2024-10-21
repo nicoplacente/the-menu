@@ -1,14 +1,45 @@
+"use client";
+
 import { createApp } from "@/actions/app/app-actions";
 import YesNoButton from "@/components/dashboard/yes-no-button";
 import SectionContainer from "@/components/yourcard-landing/section-container";
 import { auth } from "@/libs/auth";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { alerts } from "@/utils/alerts";
 
-export default async function CreateCard() {
-  const session = await auth();
-  if (!session) {
-    redirect("/auth/login");
-  }
+export default function CreateCard() {
+  // useEffect(() => {
+  //   const getSession = async () => {
+  //     const session = await auth();
+  //     if (!session) {
+  //       redirect("/auth/login");
+  //     }
+  //   };
+
+  //   getSession();
+  // }, []);
+
+  const router = useRouter();
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(e.target));
+
+    try {
+      const anashe = await createApp(JSON.stringify(data));
+
+      if (!anashe) {
+        alerts("error", "Debes completar todos los campos");
+      } else {
+        alerts("success", "Carta creada exitosamente");
+        router.push("/create-card/add-categories");
+      }
+    } catch (err) {
+      alerts("error", "Error al crear el menú, vuelve a intentarlo mas tarde");
+    }
+  };
+
   return (
     <SectionContainer
       className="text-white"
@@ -16,7 +47,7 @@ export default async function CreateCard() {
       description="Es muy simple, solo sigue las indicaciones"
     >
       <form
-        action={createApp}
+        onSubmit={handleSubmit}
         className="create-card-form grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-9 items-center"
       >
         <label>

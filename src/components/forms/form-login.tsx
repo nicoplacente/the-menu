@@ -95,7 +95,7 @@ export const FormLogin = () => {
           ¿Has olvidado tu contraseña?
         </button>
         <p>
-          ¿Todavia no tienes una cuenta?
+          ¿Todavia no tienes una cuenta?{" "}
           <Link href="/auth/register" className="hover:underline">
             Registrate
           </Link>
