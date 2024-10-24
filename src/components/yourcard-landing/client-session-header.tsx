@@ -6,6 +6,8 @@ import { HeaderButtonNotHover } from "../ui/header-button";
 
 export default function ClientSessionheader() {
   const { data: session } = useSession();
+  console.log(session?.user?.image);
+
   return (
     <>
       {session?.user ? (

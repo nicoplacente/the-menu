@@ -9,18 +9,17 @@ import { useEffect, useState } from "react";
 import { alerts } from "@/utils/alerts";
 
 export default function CreateCard() {
+  const router = useRouter();
   // useEffect(() => {
   //   const getSession = async () => {
   //     const session = await auth();
   //     if (!session) {
-  //       redirect("/auth/login");
+  //       router.push("/auth/login");
   //     }
   //   };
 
   //   getSession();
   // }, []);
-
-  const router = useRouter();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
