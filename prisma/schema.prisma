@@ -62,7 +62,6 @@ model App {
   bgColor        String
   primaryColor   String
   image          String?    @default("")
-  isImageRounded Boolean?   @default(true)
   isTitleVisible Boolean?   @default(false)
   User           User?      @relation(fields: [userId], references: [id])
   userId         String?

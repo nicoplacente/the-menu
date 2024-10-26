@@ -1,6 +1,6 @@
 export default function YesNoButton({ name }: { name: string }) {
   return (
-    <label className="relative inline-flex items-center cursor-pointer">
+    <label className="relative scale-90 inline-flex items-center cursor-pointer">
       <input
         className="sr-only peer outline-none focus:outline-none"
         type="checkbox"

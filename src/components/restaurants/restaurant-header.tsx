@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { App } from "@prisma/client";
 
-export default async function RestaurantHeader({ app }: { app: App }) {
+// export default async function RestaurantHeader({ app }: { app: App }) {
+export default async function RestaurantHeader({ app }: { app: any }) {
   return (
     <header
-      className="px-0 py-9 sm:py-12 flex items-center gap-4 justify-center"
+      className="h-52 flex items-center gap-4 justify-center relative"
       style={{ backgroundColor: app.primaryColor }}
     >
       <Link
@@ -15,14 +16,12 @@ export default async function RestaurantHeader({ app }: { app: App }) {
           <img
             src={app.image}
             alt={app.appName}
-            className={`size-16 object-cover ${
-              app.isImageRounded ? "rounded-full" : "rounded-lg"
-            } `}
+            className="object-cover absolute w-full h-full top-0 left-0 contrast-125 brightness-90 object-center"
           />
         )}
         {app.isTitleVisible && (
           <h1
-            className="text-center text-3xl font-bold"
+            className="text-center text-4xl z-10 font-thin uppercase"
             style={{ color: app.textColor }}
           >
             {app.appName}

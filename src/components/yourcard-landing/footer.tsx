@@ -33,19 +33,21 @@ export default function Footer() {
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
-            <span className="flex items-center gap-3">
-              <Image
-                src="/yourcard.webp"
-                className="rounded-full size-9"
-                alt="logo"
-                width={650}
-                height={422}
-                priority
-              />
-              <span className="self-center text-xl font-semibold whitespace-nowrap text-white">
-                YourCard
+            <div className="flex items-center gap-3">
+              <span className="inline-flex rounded-full p-0.5 overflow-hidden bg-gradient-to-br from-pink-500 to-orange-400">
+                <Image
+                  src="/themenu.webp"
+                  className="rounded-full min-w-9 aspect-square size-9 lg:size-16 hover:opacity-70 transition duration-300 animate-pulse-one"
+                  alt="logo"
+                  width={500}
+                  height={500}
+                  priority
+                />
               </span>
-            </span>
+              <span className="self-center text-xl font-semibold whitespace-nowrap text-white">
+                TheMenu
+              </span>
+            </div>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
             <div>

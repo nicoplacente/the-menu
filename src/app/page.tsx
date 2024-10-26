@@ -55,6 +55,9 @@ const pricing = [
 export default function Home() {
   return (
     <main>
+      <span className="text-xs md:text-sm absolute text-white/70 right-4 font-semibold">
+        +50 bares y restaurantes usando TheMenu
+      </span>
       <SectionContainer
         className="text-white"
         id="planes"
