@@ -89,7 +89,7 @@ export default function CreateCard() {
             type="file"
             name="image"
             className="hidden"
-            accept=".png, .jpeg, .jpg"
+            accept=".png, .jpeg, .jpg, .webp"
           />
           <span className="hover:underline cursor-pointer">Subir imágen</span>
         </label>

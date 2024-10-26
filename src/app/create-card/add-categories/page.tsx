@@ -2,15 +2,18 @@
 import { useState } from "react";
 import SectionContainer from "@/components/yourcard-landing/section-container";
 import { useRouter } from "next/navigation";
+import { alerts } from "@/utils/alerts";
 
 interface Category {
   name: string;
   subcategories: string[];
+  link?: string;
+  image?: File | null;
 }
 
 const AddCategories = () => {
   const [categories, setCategories] = useState<Category[]>([
-    { name: "", subcategories: [] },
+    { name: "", subcategories: [], link: "", image: null },
   ]);
   const router = useRouter();
 
@@ -30,8 +33,34 @@ const AddCategories = () => {
     setCategories(updatedCategories);
   };
 
+  const handleLinkChange = (index: number, value: string) => {
+    const updatedCategories = [...categories];
+    updatedCategories[index].link = value;
+    setCategories(updatedCategories);
+  };
+
+  const [file, setFile] = useState(null);
+
+  const handleFileChange = (
+    catIndex: number,
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const updatedCategories = [...categories];
+      updatedCategories[catIndex].image = e.target.files[0];
+      setCategories(updatedCategories);
+    } else {
+      const updatedCategories = [...categories];
+      updatedCategories[catIndex].image = null;
+      setCategories(updatedCategories);
+    }
+  };
+
   const addCategory = () => {
-    setCategories([...categories, { name: "", subcategories: [] }]);
+    setCategories([
+      ...categories,
+      { name: "", subcategories: [], link: "", image: null },
+    ]);
   };
 
   const addSubcategory = (index: number) => {
@@ -53,9 +82,46 @@ const AddCategories = () => {
     setCategories(updatedCategories);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(categories);
+
+    const formData = new FormData();
+    categories.forEach((category, index) => {
+      if (category.name) {
+        formData.append(`categories[${index}][name]`, category.name);
+      }
+      if (category.link) {
+        formData.append(`categories[${index}][link]`, category.link);
+      }
+      if (category.image) {
+        formData.append(`categories[${index}][image]`, category.image);
+      }
+      category.subcategories.forEach((subcategory, subIndex) => {
+        if (subcategory) {
+          formData.append(
+            `categories[${index}][subcategories][${subIndex}]`,
+            subcategory
+          );
+        }
+      });
+    });
+
+    try {
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        data.errors.map((error: any) => {
+          alerts("error", error);
+        });
+      } else if (data.success === true) {
+        alerts("success", "Categorias creadas correctamente");
+      }
+    } catch (error) {
+      console.error("Error al enviar las categorías:", error);
+    }
   };
 
   const returnPage = () => {
@@ -90,10 +156,24 @@ const AddCategories = () => {
                 </button>
               </div>
 
+              <p>Subir imagen (Opcional)</p>
+              <input
+                type="text"
+                placeholder="Link (opcional)"
+                value={category.link || ""}
+                onChange={(e) => handleLinkChange(catIndex, e.target.value)}
+                className="border p-2 mb-2 placeholder:text-black text-black"
+              />
+
+              <input
+                type="file"
+                onChange={(e) => handleFileChange(catIndex, e)}
+              />
+
               {category.subcategories.length > 0 && (
                 <div>
                   {category.subcategories.map((subcategory, subIndex) => (
-                    <div key={subIndex} className="flex ">
+                    <div key={subIndex} className="flex">
                       <input
                         type="text"
                         placeholder="Nombre de la subcategoría"
@@ -120,7 +200,6 @@ const AddCategories = () => {
               )}
             </div>
 
-            {/* Botón para agregar subcategoría opcional */}
             <button
               type="button"
               onClick={() => addSubcategory(catIndex)}
