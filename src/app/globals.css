@@ -134,3 +134,11 @@
     rotate: 0;
   }
 }
+
+/* restaurant-layout */
+
+.restaurant-layout {
+  display: grid;
+  min-height: 100dvh;
+  grid-template-rows: auto 1fr auto;
+}

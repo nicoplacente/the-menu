@@ -3,6 +3,7 @@
 // import { IconChevronRight } from "@tabler/icons-react";
 // import prisma from "@/libs/prisma";
 // import { Category } from "@prisma/client";
+import RestaurantFooter from "@/components/restaurants/restaurant-footer";
 import RestaurantHeader from "@/components/restaurants/restaurant-header";
 // interface Params {
 //   appId: string;
@@ -57,8 +58,6 @@ import RestaurantHeader from "@/components/restaurants/restaurant-header";
 //   );
 // }
 
-import SectionContainer from "@/components/yourcard-landing/section-container";
-import { IconChevronRight } from "@tabler/icons-react";
 import { Akronim } from "next/font/google";
 
 const akronim = Akronim({
@@ -76,6 +75,15 @@ const appFound = {
   textColor: "#000",
   appName: "Prueba",
   isTitleVisible: false,
+  footer: {
+    hs: "Lunes a Viernes de 13pm a 1am",
+    location: "Ameguino 1992, Coronel Suárez",
+    redes: {
+      instagram: "#",
+      facebook: "#",
+    },
+    contact: "#",
+  },
 };
 
 const categories = [
@@ -84,6 +92,60 @@ const categories = [
     name: "Bebidas",
     image:
       "https://imgs.search.brave.com/ZhUiE1_M_HkDk6IWfoVdkJZ892rpXN-k_q_7UphUHEU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9hY2Ru/Lm1pdGllbmRhbnVi/ZS5jb20vc3RvcmVz/Lzk3Mi8yNjkvcHJv/ZHVjdHMvMjAyNDAy/MTBfMTIwNzUzLTlj/ODliNjNlMjljZTFk/YzRiNTE3MDc1OTE3/MTA3MjE2LTEwMC0w/LmpwZw",
+    products: [
+      {
+        id: "coca",
+        name: "Coca Cola",
+        price: 5000,
+      },
+      {
+        id: "fernet",
+        name: "Fernet",
+        price: 9000,
+      },
+    ],
+  },
+  {
+    id: "pizzas",
+    name: "Pizzas",
+    image:
+      "https://imgs.search.brave.com/8KSOwJUW0xPtyGboujoZ7WRGqyCZEbBReMmOsLpZUdI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTg0/OTQ2NzAxL3Bob3Rv/L3BpenphLmpwZz9z/PTYxMng2MTImdz0w/Jms9MjAmYz05N3Jj/MFZJaS1zM21uNHhl/NHhEeTlTLVhKX09o/Ym45MlhhRU1haUlE/X2VZPQ",
+    products: [
+      {
+        id: "coca",
+        name: "Coca Cola",
+        price: 5000,
+      },
+      {
+        id: "fernet",
+        name: "Fernet",
+        price: 9000,
+      },
+    ],
+  },
+  {
+    id: "pizzas",
+    name: "Pizzas",
+    image:
+      "https://imgs.search.brave.com/8KSOwJUW0xPtyGboujoZ7WRGqyCZEbBReMmOsLpZUdI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTg0/OTQ2NzAxL3Bob3Rv/L3BpenphLmpwZz9z/PTYxMng2MTImdz0w/Jms9MjAmYz05N3Jj/MFZJaS1zM21uNHhl/NHhEeTlTLVhKX09o/Ym45MlhhRU1haUlE/X2VZPQ",
+    products: [
+      {
+        id: "coca",
+        name: "Coca Cola",
+        price: 5000,
+      },
+      {
+        id: "fernet",
+        name: "Fernet",
+        price: 9000,
+      },
+    ],
+  },
+  {
+    id: "pizzas",
+    name: "Pizzas",
+    image:
+      "https://imgs.search.brave.com/8KSOwJUW0xPtyGboujoZ7WRGqyCZEbBReMmOsLpZUdI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTg0/OTQ2NzAxL3Bob3Rv/L3BpenphLmpwZz9z/PTYxMng2MTImdz0w/Jms9MjAmYz05N3Jj/MFZJaS1zM21uNHhl/NHhEeTlTLVhKX09o/Ym45MlhhRU1haUlE/X2VZPQ",
     products: [
       {
         id: "coca",
@@ -133,37 +195,36 @@ function hexToRGBA(hex: string, alpha = 1) {
 export default function Design() {
   return (
     <main
-      className={`h-screen ${akronim.className}`}
+      className={`${akronim.className} flex flex-col restaurant-layout`}
       style={{ backgroundColor: "#171717", color: "#fff" }}
     >
-      <RestaurantHeader app={appFound} />
-      <SectionContainer>
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {categories.map((category) => {
-            return (
-              <article
-                key={category.id}
-                style={{
-                  boxShadow: `0px 2px 12px ${hexToRGBA(
-                    appFound.primaryColor,
-                    0.3
-                  )}`,
-                }}
-                className="relative flex justify-center items-end cursor-pointer group aspect-[300/150] max-h-full rounded-sm overflow-hidden"
-              >
-                <img
-                  src={category.image}
-                  alt={category.name}
-                  className="absolute object-cover size-full object-center group-hover:scale-110 transition duration-300"
-                />
-                <h4 className="font-thin bg-black/20 w-full p-2 contrast-125 backdrop-blur-sm z-10 text-2xl text-center">
-                  {category.name}
-                </h4>
-              </article>
-            );
-          })}
-        </section>
-      </SectionContainer>
+      <RestaurantHeader appFound={appFound} />
+      <div className="grid grid-cols-1 md:grid-cols-3 max-w-5xl w-full mx-auto my-12 gap-4">
+        {categories.map((category) => {
+          return (
+            <article
+              key={category.id}
+              style={{
+                boxShadow: `0px 2px 12px ${hexToRGBA(
+                  appFound.primaryColor,
+                  0.3
+                )}`,
+              }}
+              className="relative flex justify-center items-end cursor-pointer aspect-[300/150] group size-full rounded-sm overflow-hidden"
+            >
+              <img
+                src={category.image}
+                alt={category.name}
+                className="absolute object-cover size-full object-center group-hover:scale-110 transition duration-300"
+              />
+              <h4 className="font-thin bg-black/20 w-full p-2 contrast-125 backdrop-blur-sm z-10 text-2xl text-center">
+                {category.name}
+              </h4>
+            </article>
+          );
+        })}
+      </div>
+      <RestaurantFooter appFound={appFound}></RestaurantFooter>
     </main>
   );
 }
