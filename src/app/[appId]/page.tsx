@@ -71,7 +71,7 @@ const appFound = {
   primaryColor: "#ce4b09ff",
   bgColor: "#171717",
   image:
-    "https://imgs.search.brave.com/xfZq7wH_JUqyY8zo58rGfOAQhqggmhecXW7a2dmQYOw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90ZW1w/bGF0ZS5jYW52YS5j/b20vRUFEYXBEdDYt/dzgvMS8wLzQwMHct/REZSc0huUHRJWUUu/anBn",
+    "https://imgs.search.brave.com/4KXih2USYnq7H7J53xLFlnpUDfGoOUbKLFb5s4fZHfo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXM3LmFscGhhY29k/ZXJzLmNvbS84NTQv/ODU0MTU2LmpwZw",
   textColor: "#000",
   appName: "Prueba",
   isTitleVisible: false,
@@ -199,7 +199,7 @@ export default function Design() {
       style={{ backgroundColor: "#171717", color: "#fff" }}
     >
       <RestaurantHeader appFound={appFound} />
-      <div className="grid grid-cols-1 md:grid-cols-3 max-w-5xl w-full mx-auto my-12 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 max-w-5xl xl:max-w-[1500px] w-full mx-auto my-12 gap-4">
         {categories.map((category) => {
           return (
             <article

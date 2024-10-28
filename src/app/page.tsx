@@ -62,7 +62,7 @@ export default function Home() {
         className="text-white"
         id="planes"
         title="TheMenu"
-        description="Elegí el plan ideal para vos. +100 bares y restaurantes usan este servicio"
+        description="Elegí el plan ideal para vos"
       >
         <div className="flex flex-col-reverse md:flex-row items-center justify-center gap-12">
           {pricing.map((card: PricingTypes) => {
@@ -79,6 +79,16 @@ export default function Home() {
           siguiente nivel. "
       >
         <YourcardInfo />
+        {/* <iframe
+          className="w-3/4 min-h-[1080px]"
+          src="http://localhost:3000/prueba"
+          frameborder="0"
+        ></iframe>
+        <iframe
+          className="w-96 min-h-[700px]"
+          src="http://localhost:3000/prueba"
+          frameborder="0"
+        ></iframe> */}
       </SectionContainer>
     </main>
   );
