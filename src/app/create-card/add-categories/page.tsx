@@ -18,15 +18,6 @@ const AddCategories = () => {
   ]);
 
   const { data, update } = useSession();
-
-  useEffect(() => {
-    (async () => {
-      await update();
-    })();
-  }, []);
-
-  console.log(data);
-
   const router = useRouter();
 
   const handleCategoryChange = (index: number, value: string) => {

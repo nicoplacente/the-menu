@@ -12,8 +12,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     updateAge: 10,
   },
   callbacks: {
-    jwt: async ({ token, user, trigger, session }) => {
-      if (user || (trigger === "update" && session)) {
+    jwt: async ({ token, user }) => {
+      if (token) {
         const dbUser = await prisma.user.findUnique({
           where: { id: user ? (user.id as string) : (token.id as string) },
           include: {
@@ -21,7 +21,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             app: true,
           },
         });
-
         token.id = dbUser?.id;
         token.name = dbUser?.name as string;
         token.phone = dbUser?.phone as string;

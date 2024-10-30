@@ -14,7 +14,6 @@ import { useSession } from "next-auth/react";
 export default function CreateCard() {
   const router = useRouter();
   const { data, update } = useSession();
-  console.log(data?.user);
 
   const userId = data?.user?.id;
   const handleSubmit = async (e: any) => {
