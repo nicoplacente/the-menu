@@ -1,8 +1,9 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SectionContainer from "@/components/yourcard-landing/section-container";
 import { useRouter } from "next/navigation";
 import { alerts } from "@/utils/alerts";
+import { useSession } from "next-auth/react";
 
 interface Category {
   name: string;
@@ -15,6 +16,17 @@ const AddCategories = () => {
   const [categories, setCategories] = useState<Category[]>([
     { name: "", subcategories: [], link: "", image: null },
   ]);
+
+  const { data, update } = useSession();
+
+  useEffect(() => {
+    (async () => {
+      await update();
+    })();
+  }, []);
+
+  console.log(data);
+
   const router = useRouter();
 
   const handleCategoryChange = (index: number, value: string) => {
