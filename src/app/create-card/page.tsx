@@ -14,7 +14,6 @@ import { useSession } from "next-auth/react";
 export default function CreateCard() {
   const router = useRouter();
   const { data, update } = useSession();
-
   const userId = data?.user?.id;
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -22,7 +21,6 @@ export default function CreateCard() {
     const dataFull = { ...data, userId };
     try {
       const anashe = await createApp(JSON.stringify(dataFull));
-
       if (!anashe) {
         alerts("error", "Debes completar todos los campos");
       } else {
