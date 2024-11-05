@@ -73,7 +73,7 @@ const appFound = {
   image:
     "https://imgs.search.brave.com/4KXih2USYnq7H7J53xLFlnpUDfGoOUbKLFb5s4fZHfo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXM3LmFscGhhY29k/ZXJzLmNvbS84NTQv/ODU0MTU2LmpwZw",
   textColor: "#000",
-  appName: "Prueba",
+  appName: "Tacos Bar",
   isTitleVisible: false,
   footer: {
     hs: "Lunes a Viernes de 13pm a 1am",
@@ -82,7 +82,7 @@ const appFound = {
       instagram: "#",
       facebook: "#",
     },
-    contact: "#",
+    contact: "2926402409",
   },
 };
 
@@ -199,7 +199,7 @@ export default function Design() {
       style={{ backgroundColor: "#171717", color: "#fff" }}
     >
       <RestaurantHeader appFound={appFound} />
-      <div className="grid grid-cols-1 md:grid-cols-3 max-w-5xl xl:max-w-[1500px] w-full mx-auto my-12 gap-4">
+      <div className="grid grid-cols-1 px-4 md:grid-cols-3 max-w-5xl xl:max-w-[1500px] w-full mx-auto my-12 gap-4">
         {categories.map((category) => {
           return (
             <article
