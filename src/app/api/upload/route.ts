@@ -6,8 +6,30 @@ import handleFileUpload from "@/utils/validators/validate-image";
 export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData();
+
     const categories = [];
     const uploadErrors: string[] = [];
+    const userAppData = formData.get("userApp[0]") as string;
+    const appData = JSON.parse(userAppData);
+
+    let app = await prisma.app.findUnique({
+      where: { id: appData.id },
+    });
+
+    if (!app) {
+      app = await prisma.app.create({
+        data: {
+          id: appData.id,
+          appName: appData.appName,
+          textColor: appData.textColor,
+          bgColor: appData.bgColor,
+          primaryColor: appData.primaryColor,
+          image: appData.image,
+          isTitleVisible: appData.isTitleVisible,
+          userId: appData.userId,
+        },
+      });
+    }
 
     for (let i = 0; formData.has(`categories[${i}][name]`); i++) {
       const name = formData.get(`categories[${i}][name]`) as string;
@@ -32,7 +54,7 @@ export async function POST(req: NextRequest) {
 
         if (!success) {
           uploadErrors.push(
-            `Error en la categoría "${name}": ${errors.join(", ")}`
+            `Error in category "${name}": ${errors.join(", ")}`
           );
           continue;
         }
@@ -43,10 +65,27 @@ export async function POST(req: NextRequest) {
         categoryImage = await uploadToR2(buffer, "aci", imageKey);
       }
 
-      categories.push({
-        name: name,
-        categoryImage: categoryImage,
-        subcategories: subcategories,
+      const categoryData = {
+        name,
+        categoryImage,
+        subcategories,
+      };
+      categories.push(categoryData);
+
+      // Create the category and link it to the App
+      await prisma.category.create({
+        data: {
+          categoryID: name.trim().toLowerCase().replace(/ /g, "-"),
+          name: categoryData.name,
+          categoryImage: categoryData.categoryImage,
+          appId: app.id,
+          subcategories: {
+            create: categoryData.subcategories.map((subcat) => ({
+              name: subcat,
+            })),
+          },
+        },
+        include: { subcategories: true },
       });
     }
 
@@ -60,40 +99,19 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
-    for (const category of categories) {
-      const categoryID = category.name
-        .trim()
-        .split(" ")
-        .join("-")
-        .toLowerCase();
-      await prisma.category.create({
-        data: {
-          categoryID,
-          name: category.name,
-          categoryImage: category.categoryImage,
-          subcategories: {
-            create: category.subcategories.map((subcat) => ({
-              name: subcat,
-            })),
-          },
-        },
-        include: {
-          subcategories: true,
-        },
-      });
-    }
 
     return new NextResponse(
       JSON.stringify({
-        message: "Archivos subidos correctamente",
+        message: "Categorías creadas correctamente",
         categories,
         success: true,
       }),
       { status: 200 }
     );
   } catch (error) {
+    console.error("Error al crear las categorías:", error);
     return new NextResponse(
-      JSON.stringify({ message: "Error uploading file" }),
+      JSON.stringify({ message: "Error al crear las categorías" }),
       { status: 500 }
     );
   } finally {

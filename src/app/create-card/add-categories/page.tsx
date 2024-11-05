@@ -18,6 +18,7 @@ const AddCategories = () => {
   ]);
 
   const { data, update } = useSession();
+
   const router = useRouter();
 
   const handleCategoryChange = (index: number, value: string) => {
@@ -109,17 +110,23 @@ const AddCategories = () => {
       });
     });
 
+    if (data?.user?.app) {
+      data.user.app.forEach((item: any, index: number) => {
+        formData.append(`userApp[${index}]`, JSON.stringify(item));
+      });
+    }
+
     try {
       const res = await fetch("/api/upload", {
         method: "POST",
         body: formData,
       });
-      const data = await res.json();
-      if (data.success === false) {
-        data.errors.map((error: any) => {
+      const responseData = await res.json();
+      if (responseData.success === false) {
+        responseData.errors.map((error: any) => {
           alerts("error", error);
         });
-      } else if (data.success === true) {
+      } else if (responseData.success === true) {
         alerts("success", "Categorias creadas correctamente");
       }
     } catch (error) {
