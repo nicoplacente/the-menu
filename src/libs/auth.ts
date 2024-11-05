@@ -13,9 +13,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   callbacks: {
     jwt: async ({ token, user }) => {
-      if (user) {
+      if (token) {
         const dbUser = await prisma.user.findUnique({
-          where: { id: user.id },
+          where: { id: user ? (user.id as string) : (token.id as string) },
           include: {
             accounts: true,
             app: true,
@@ -24,15 +24,17 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token.id = dbUser?.id;
         token.name = dbUser?.name as string;
         token.phone = dbUser?.phone as string;
-        token.provider = dbUser?.accounts[0]?.provider;
+        token.provider = dbUser?.accounts?.[0]?.provider;
         token.accounts = dbUser?.accounts;
         token.app = dbUser?.app;
       }
+
       return token;
     },
+
     session({ session, token }) {
       session.user.id = token.id as string;
-      session.user.name = token.name as string;
+      session.user.name = token.name;
       session.user.phone = token.phone;
       session.user.provider = token.provider;
       session.user.accounts = token.accounts;
@@ -40,6 +42,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       return session;
     },
   },
+
   events: {
     async linkAccount({ user }) {
       await prisma.user.update({

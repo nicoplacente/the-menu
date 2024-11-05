@@ -13,18 +13,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String    @unique
-  password      String?
-  emailVerified DateTime?
-  image         String?
-  phone         String?
-  terms         Boolean   @default(false)
-  app           App[]
-  accounts      Account[]
-}
+// model User {
+//   id            String    @id @default(cuid())
+//   name          String?
+//   email         String    @unique
+//   password      String?
+//   emailVerified DateTime?
+//   image         String?
+//   phone         String?
+//   terms         Boolean   @default(false)
+//   app           App[]
+//   accounts      Account[]
+// }
 
 model Account {
   userId            String
@@ -52,6 +52,19 @@ model VerificationToken {
   expires    DateTime
 
   @@id([identifier])
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  password      String?
+  emailVerified DateTime?
+  image         String?
+  phone         String?
+  terms         Boolean   @default(false)
+  app           App[]
+  accounts      Account[]
 }
 
 model App {
