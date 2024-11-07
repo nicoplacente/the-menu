@@ -8,10 +8,9 @@ import { alerts } from "@/utils/alerts";
 import Label from "@/components/ui/label-form";
 import InputForm from "@/components/ui/input-form";
 import Parrafos from "@/components/ui/parrafos";
-import { IconUpload } from "@tabler/icons-react";
 import { useSession } from "next-auth/react";
 
-export default function CreateCard() {
+export default function Preview() {
   const router = useRouter();
   const { data, update } = useSession();
   const userId = data?.user?.id;
@@ -42,30 +41,42 @@ export default function CreateCard() {
       <form onSubmit={handleSubmit} className="flex flex-col items-center">
         <div className="create-card-form grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-6 items-center">
           <Label>
-            <h3>Nombre del restaurante</h3>
-
-            <InputForm
-              type="text"
-              className="py-2 px-4 bg-gray-900 text-white"
-              name="appName"
-              placeholder="Ej: Tacos Bar"
-            />
+            <h4>Color principal</h4>
+            <Parrafos>Este será el color que resaltará en la carta</Parrafos>
+            <InputForm type="color" name="primaryColor" className="hidden" />
+            <span className="hover:underline cursor-pointer opacity-75">
+              Seleccionar color
+            </span>
           </Label>
 
           <Label>
-            <h4>Banner</h4>
-            <Parrafos>
-              Ingresa una foto del banner o logo de tu restaurante
-            </Parrafos>
-            <InputForm
-              type="file"
-              name="image"
-              className="hidden"
-              accept=".png, .jpeg, .jpg, .webp"
-            />
-            <span className="hover:underline cursor-pointer flex gap-2 items-center">
-              Subir imágen <IconUpload />
+            <h4>Color de fondo</h4>
+            <Parrafos>Este será el color de fondo en la carta</Parrafos>
+            <InputForm type="color" name="bgColor" className="hidden" />
+            <span className="hover:underline cursor-pointer opacity-75">
+              Seleccionar color
             </span>
+          </Label>
+
+          <Label>
+            <h4>Color del texto</h4>
+            <Parrafos>
+              Es recomendable elegir un color que contraste bien con el color de
+              fondo
+            </Parrafos>
+            <select
+              name="textColor"
+              className="bg-transparent p-2 opacity-70 [&>option]:bg-gray-900"
+            >
+              <option value="#000">Negro</option>
+              <option value="#FFF">Blanco</option>
+            </select>
+          </Label>
+
+          <Label>
+            <h4>¿Mostrar el nombre de la carta como titulo en el banner?</h4>
+            <Parrafos>Si marcas que no, solo se verá el banner</Parrafos>
+            <YesNoButton name="isTitleVisible" />
           </Label>
         </div>
 
