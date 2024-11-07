@@ -10,6 +10,8 @@ import InputForm from "@/components/ui/input-form";
 import Parrafos from "@/components/ui/parrafos";
 import { useSession } from "next-auth/react";
 
+const appName = "http://localhost:3000/prueba-diseño";
+
 export default function Preview() {
   const router = useRouter();
   const { data, update } = useSession();
@@ -39,45 +41,49 @@ export default function Preview() {
       description="Es muy simple, solo sigue las indicaciones"
     >
       <form onSubmit={handleSubmit} className="flex flex-col items-center">
-        <div className="create-card-form grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-6 items-center">
-          <Label>
-            <h4>Color principal</h4>
-            <Parrafos>Este será el color que resaltará en la carta</Parrafos>
-            <InputForm type="color" name="primaryColor" className="hidden" />
-            <span className="hover:underline cursor-pointer opacity-75">
-              Seleccionar color
-            </span>
-          </Label>
+        <div className="flex items-center gap-6">
+          <div className="create-card-form grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-6 items-center">
+            <Label>
+              <h4>Color principal</h4>
+              <Parrafos>Este será el color que resaltará en la carta</Parrafos>
+              <InputForm type="color" name="primaryColor" className="hidden" />
+              <span className="hover:underline cursor-pointer opacity-75">
+                Seleccionar color
+              </span>
+            </Label>
 
-          <Label>
-            <h4>Color de fondo</h4>
-            <Parrafos>Este será el color de fondo en la carta</Parrafos>
-            <InputForm type="color" name="bgColor" className="hidden" />
-            <span className="hover:underline cursor-pointer opacity-75">
-              Seleccionar color
-            </span>
-          </Label>
+            <Label>
+              <h4>Color de fondo</h4>
+              <Parrafos>Este será el color de fondo en la carta</Parrafos>
+              <InputForm type="color" name="bgColor" className="hidden" />
+              <span className="hover:underline cursor-pointer opacity-75">
+                Seleccionar color
+              </span>
+            </Label>
 
-          <Label>
-            <h4>Color del texto</h4>
-            <Parrafos>
-              Es recomendable elegir un color que contraste bien con el color de
-              fondo
-            </Parrafos>
-            <select
-              name="textColor"
-              className="bg-transparent p-2 opacity-70 [&>option]:bg-gray-900"
-            >
-              <option value="#000">Negro</option>
-              <option value="#FFF">Blanco</option>
-            </select>
-          </Label>
+            <Label>
+              <h4>Color del texto</h4>
+              <Parrafos>
+                Es recomendable elegir un color que contraste bien con el color
+                de fondo
+              </Parrafos>
+              <select
+                name="textColor"
+                className="bg-transparent p-2 opacity-70 [&>option]:bg-gray-900"
+              >
+                <option value="#000">Negro</option>
+                <option value="#FFF">Blanco</option>
+              </select>
+            </Label>
 
-          <Label>
-            <h4>¿Mostrar el nombre de la carta como titulo en el banner?</h4>
-            <Parrafos>Si marcas que no, solo se verá el banner</Parrafos>
-            <YesNoButton name="isTitleVisible" />
-          </Label>
+            <Label>
+              <h4>¿Mostrar el nombre de la carta como titulo en el banner?</h4>
+              <Parrafos>Si marcas que no, solo se verá el banner</Parrafos>
+              <YesNoButton name="isTitleVisible" />
+            </Label>
+          </div>
+
+          <iframe src={appName} className="h-screen"></iframe>
         </div>
 
         <button

@@ -3,16 +3,8 @@
 import prisma from "@/libs/prisma";
 
 export async function createApp(formData: any) {
-  const {
-    appName,
-    primaryColor,
-    bgColor,
-    textColor,
-    image,
-    isTitleVisible,
-    userId,
-  } = JSON.parse(formData);
-  const isTitleVisibleBool = isTitleVisible?.toString() == "on";
+  const { appName, image, userId } = JSON.parse(formData);
+  // const isTitleVisibleBool = isTitleVisible?.toString() == "on";
   try {
     const userExists = await prisma.user.findUnique({
       where: {
@@ -24,7 +16,7 @@ export async function createApp(formData: any) {
       return { error: "Usuario no encontrado" };
     }
 
-    if (!appName || !primaryColor || !bgColor || !textColor) {
+    if (!appName) {
       return false;
     }
 
@@ -40,11 +32,7 @@ export async function createApp(formData: any) {
       data: {
         id,
         appName,
-        primaryColor,
-        bgColor,
-        textColor,
         image: temporalImg,
-        isTitleVisible: isTitleVisibleBool,
         userId,
       },
       include: {

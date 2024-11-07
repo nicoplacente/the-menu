@@ -26,7 +26,7 @@ export default function CreateCard() {
       } else {
         await update();
         alerts("success", "Carta creada exitosamente");
-        router.push("/create-card/add-categories");
+        router.push("/create-card/preview");
       }
     } catch (err) {
       alerts("error", "Error al crear el menú, vuelve a intentarlo mas tarde");
