@@ -18,7 +18,15 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           where: { id: user ? (user.id as string) : (token.id as string) },
           include: {
             accounts: true,
-            app: true,
+            app: {
+              include: {
+                categories: {
+                  include: {
+                    subcategories: true,
+                  },
+                },
+              },
+            },
           },
         });
         token.id = dbUser?.id;

@@ -27,7 +27,7 @@ export const DynamicComponent = () => {
   };
   return (
     <SectionContainer>
-      <div className="border-2">
+      <div className="flex">
         <AsideBar onSelect={setSelectedComponent} />
         <div className="flex-grow">{renderComponent()}</div>
       </div>
