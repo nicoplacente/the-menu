@@ -1,5 +1,10 @@
-export const MethodPayment: React.FC = () => {
+import MercadoPago from "../method-payment/mercado-pago";
+import SectionContainer from "../yourcard-landing/section-container";
+
+export default function MethodPayment() {
   return (
-    <div className="text-white">Contenido del Administrar metodo de pago</div>
+    <SectionContainer>
+      <MercadoPago />
+    </SectionContainer>
   );
-};
+}

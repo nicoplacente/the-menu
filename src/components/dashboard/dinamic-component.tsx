@@ -3,10 +3,10 @@ import { useState } from "react";
 import AsideBar from "./aside-bar-dashboard";
 import { AdminCard } from "./admin-card";
 import { CancelSub } from "./cancel-sub";
-import { MethodPayment } from "./method-payment";
 import { FormDashboard } from "./form-dashboard";
 import { Perfil } from "./perfil";
 import SectionContainer from "../yourcard-landing/section-container";
+import MethodPayment from "./method-payment";
 
 export const DynamicComponent = () => {
   const [selectedComponent, setSelectedComponent] = useState<string>("Perfil");
