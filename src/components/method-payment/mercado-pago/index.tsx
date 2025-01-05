@@ -6,7 +6,7 @@ export default function MercadoPago() {
         className="relative hover:opacity-70 transition duration-300 inline-flex items-center justify-center p-2 w-full mb-2 me-2 overflow-hidden text-sm font-medium  rounded-lg group bg-gradient-to-br to-orange-400 from-pink-500  text-white  focus:ring-4 focus:outline-none focus:ring-pink-800"
         target="_blank"
       >
-        Suscribirte
+        Suscribirte a your card
       </a>
     </div>
   );
