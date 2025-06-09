@@ -1,5 +1,5 @@
 "use client";
-import { registerAction } from "@/actions/auth/auth-actions";
+// import { registerAction } from "@/actions/auth/auth-actions";
 import Input from "@/components/ui/inputLogin";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -8,8 +8,8 @@ import { Button } from "@/components/ui/button";
 import { CheckBoxButton } from "@/components/ui/checkbox-button";
 import Link from "next/link";
 import { validateRegister } from "@/utils/validators/register-validations";
-import { LoginGoogleAction } from "@/actions/auth/login-google";
-import { useSession } from "next-auth/react";
+// import { LoginGoogleAction } from "@/actions/auth/login-google";
+// import { useSession } from "next-auth/react";
 import { alerts } from "@/utils/alerts";
 export const FormRegister = () => {
   const {
@@ -19,42 +19,42 @@ export const FormRegister = () => {
     formState: { errors },
   } = useForm();
   const router = useRouter();
-  const { update } = useSession();
-  const onSubmit = async (data: any) => {
-    try {
-      const validationErrors = await validateRegister(data);
-      if (validationErrors) {
-        Object.keys(validationErrors).forEach((field) => {
-          setError(field, {
-            type: "manual",
-            message: validationErrors[field],
-          });
-        });
-        return;
-      }
-      const result = await registerAction(data);
-      if (result.success === true) {
-        await update();
-        router.push("/auth/login");
-        alerts("success", "Registro realizado correctamente");
-      }
-    } catch (error) {
-      alerts("error", "Ocurrió un error al registrar el usuario");
-    }
-  };
+  // const { update } = useSession();
+  // const onSubmit = async (data: any) => {
+  //   try {
+  //     const validationErrors = await validateRegister(data);
+  //     if (validationErrors) {
+  //       Object.keys(validationErrors).forEach((field) => {
+  //         setError(field, {
+  //           type: "manual",
+  //           message: validationErrors[field],
+  //         });
+  //       });
+  //       return;
+  //     }
+  //     const result = await registerAction(data);
+  //     if (result.success === true) {
+  //       await update();
+  //       router.push("/auth/login");
+  //       alerts("success", "Registro realizado correctamente");
+  //     }
+  //   } catch (error) {
+  //     alerts("error", "Ocurrió un error al registrar el usuario");
+  //   }
+  // };
 
-  const SubmitGoogle = async () => {
-    await LoginGoogleAction();
-  };
+  // const SubmitGoogle = async () => {
+  //   await LoginGoogleAction();
+  // };
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      // onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col gap-4 mx-auto justify-center lg:w-1/4"
     >
       <button
         type="button"
-        onClick={SubmitGoogle}
+        // onClick={SubmitGoogle}
         className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white text-white focus:ring-4 focus:outline-none focus:ring-pink-800"
         aria-label="Iniciar sesión con Google"
       >

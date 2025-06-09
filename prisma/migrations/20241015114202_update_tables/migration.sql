@@ -1,8 +1,0 @@
--- AlterTable
-ALTER TABLE "App" ADD COLUMN     "userId" TEXT;
-
--- AddForeignKey
-ALTER TABLE "App" ADD CONSTRAINT "App_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Category" ADD CONSTRAINT "Category_appId_fkey" FOREIGN KEY ("appId") REFERENCES "App"("id") ON DELETE SET NULL ON UPDATE CASCADE;

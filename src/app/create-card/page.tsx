@@ -1,7 +1,6 @@
 "use client";
 
-import { createApp } from "@/actions/app/app-actions";
-import YesNoButton from "@/components/dashboard/yes-no-button";
+// import { createApp } from "@/actions/app/app-actions";
 import SectionContainer from "@/components/yourcard-landing/section-container";
 import { useRouter } from "next/navigation";
 import { alerts } from "@/utils/alerts";
@@ -9,24 +8,25 @@ import Label from "@/components/ui/label-form";
 import InputForm from "@/components/ui/input-form";
 import Parrafos from "@/components/ui/parrafos";
 import { IconUpload } from "@tabler/icons-react";
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 
 export default function CreateCard() {
   const router = useRouter();
-  const { data, update } = useSession();
-  const userId = data?.user?.id;
+  // const { data, update } = useSession();
+  // const userId = data?.user?.id;
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.target));
-    const dataFull = { ...data, userId };
+    // const dataFull = { ...data, userId };
     try {
-      const anashe = await createApp(JSON.stringify(dataFull));
+      // const anashe = await createApp(JSON.stringify(dataFull));
+      const anashe = true;
       if (!anashe) {
         alerts("error", "Debes completar todos los campos");
       } else {
-        await update();
+        // await update();
         alerts("success", "Carta creada exitosamente");
-        router.push("/create-card/preview");
+        // router.push("/create-card/preview");
       }
     } catch (err) {
       alerts("error", "Error al crear el menú, vuelve a intentarlo mas tarde");

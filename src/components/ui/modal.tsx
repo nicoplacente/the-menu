@@ -38,8 +38,8 @@ export function Modal({ onclick }: ModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-lg flex justify-center items-center">
-      <div className="bg-white p-4 rounded-lg shadow-lg">
+    <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-lg w-full flex justify-center items-center">
+      <div className="bg-white p-4 rounded-lg shadow-lg max-w-md w-full border-sky-500 border-2">
         <h2 className="text-lg font-semibold mb-4">Restablecer contraseña</h2>
         <input
           {...register("email", {
@@ -63,13 +63,13 @@ export function Modal({ onclick }: ModalProps) {
         <div className="flex justify-center gap-4 mt-4">
           <button
             onClick={onclick}
-            className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600"
+            className="bg-gray-500 text-white py-2 px-4 rounded hover:opacity-70 transition w-full"
           >
             Cancelar
           </button>
           <button
             type="button"
-            className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+            className="py-2 px-4 rounded bg-gradient-to-br to-orange-400 from-pink-500 w-full text-white hover:opacity-70 transition"
             onClick={handleSubmit(onSubmit)}
           >
             Enviar
